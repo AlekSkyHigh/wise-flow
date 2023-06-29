@@ -3,10 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './features/home/home.component';
-import { LoginComponent } from './features/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { TvmComponent } from './pages/tvm/tvm.component';
+import { CurrencyConverterComponent } from './pages/currency-converter/currency-converter.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { FooterComponent } from './shared/footer/footer.component';
     HomeComponent,
     LoginComponent,
     NavigationComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent,
+    TvmComponent,
+    CurrencyConverterComponent
   ],
   imports: [
     BrowserModule,
