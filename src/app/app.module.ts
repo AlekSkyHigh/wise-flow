@@ -13,6 +13,7 @@ import { CurrencyConverterComponent } from './pages/currency-converter/currency-
 import { ContactsComponent } from './pages/contacts/contacts.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AddFlowsComponent } from './pages/add-flows/add-flows.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AddFlowsComponent } from './pages/add-flows/add-flows.component';
     CurrencyConverterComponent,
     ContactsComponent,
     AboutComponent,
-    AddFlowsComponent
+    AddFlowsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
