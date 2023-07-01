@@ -10,6 +10,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TvmComponent } from './pages/tvm/tvm.component';
 import { CurrencyConverterComponent } from './pages/currency-converter/currency-converter.component';
+import { ContactsComponent } from './pages/contacts/contacts.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { CurrencyConverterComponent } from './pages/currency-converter/currency-
     FooterComponent,
     RegisterComponent,
     TvmComponent,
-    CurrencyConverterComponent
+    CurrencyConverterComponent,
+    ContactsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
