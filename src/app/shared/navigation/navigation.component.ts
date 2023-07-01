@@ -18,7 +18,5 @@ export class NavigationComponent {
 
     initTE({ Collapse });
 
-
-
   }
 }
