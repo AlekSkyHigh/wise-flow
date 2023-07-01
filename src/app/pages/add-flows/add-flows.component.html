@@ -1,1 +1,65 @@
-<p>add-flows works!</p>
+<form action="" class="text-white flex item-center justify-center flex-col text-2xl w-full">
+
+    <div class="mx-auto w-1/3 flex mb-3">
+        <label for="visitors" class="block font-medium w-64 text-left">Type of flow:</label>
+
+        <div class="flex items-center pl-4 border border-gray-200 rounded-lg dark:border-gray-700 bg-gray-700 mr-3">
+            <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+                class="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 border-gray-600">
+            <label for="bordered-radio-1"
+                class="w-full py-2 mx-2 font-light text-gray-900 dark:text-gray-300">Income</label>
+        </div>
+        <div class="flex items-center pl-4 border border-gray-200 rounded-lg dark:border-gray-700 bg-gray-700">
+            <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="bordered-radio-2"
+                class="w-full py-2 mx-2 font-light text-gray-900 dark:text-gray-300">Expense</label>
+        </div>
+
+    </div>
+
+    <div class="mx-auto w-1/3 flex mb-3">
+        <label for="visitors" class="block font-medium w-64 text-left">Occurance of flow:</label>
+
+        <div class="flex items-center pl-4 border border-gray-200 rounded-lg dark:border-gray-700 bg-gray-700 mr-3">
+            <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+                class="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 border-gray-600">
+            <label for="bordered-radio-1"
+                class="w-full py-2 mx-2 font-light text-gray-900 dark:text-gray-300">One-time</label>
+        </div>
+        <div class="flex items-center pl-4 border border-gray-200 rounded-lg dark:border-gray-700 bg-gray-700">
+            <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="bordered-radio-2"
+                class="w-full py-2 mx-2 font-light text-gray-900 dark:text-gray-300">Regular</label>
+        </div>
+
+    </div>
+
+
+    <div class="mx-auto w-1/3 flex mb-3">
+        <label for="visitors" class="block font-medium w-64 text-left">Amount:</label>
+        <input type="number" id="visitors"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="" required>
+    </div>
+
+    <div class="mx-auto w-1/3 flex mb-3">
+        <label for="visitors" class="block font-medium w-64 text-left">Date:</label>
+        <input type="date" id="visitors"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="" required>
+    </div>
+
+    <div class="mx-auto w-1/3 flex mb-3">
+        <label for="message" class="block mb-2 font-medium w-64">Description:</label>
+        <textarea id="message" rows="4"
+            class="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Write your thoughts here..."></textarea>
+    </div>
+
+    <div class="mx-auto w-1/3 flex mb-3">
+        <button type="button" class="mx-auto hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)">Add Flow!</button>
+    </div>
+
+</form>
