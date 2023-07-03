@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
   
     register(email: string, password: string, firstName: string, lastName: string) {
       // Implementation for user registration functionality
-      return this.http.post('http://localhost:3030/users/register', { email, password, firstName, lastName });
+      return this.http.post(environment.apiUrl + 'users/register', { email, password, firstName, lastName });
     }
   
     // logout() {
