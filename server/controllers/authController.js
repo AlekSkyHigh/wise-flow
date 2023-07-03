@@ -5,9 +5,12 @@ const { register, login, logout } = require('../services/userService');
 const { parseError } = require('../util/parser');
 
 
-authController.post('/register',
+authController.post(
+    '/register',
     body('email').isEmail().withMessage('Invalid email'),
-    body('password').isLength({ min: 3 }).withMessage('Password must be at least 3 characters long'),
+    body('password').isLength({ min: 4 }).withMessage('Password must be at least 4 characters long'),
+    body('firstName').notEmpty().withMessage('First name is required'),
+    body('lastName').notEmpty().withMessage('Last name is required'),
     async (req, res) => {
         try {
             const { errors } = validationResult(req);
@@ -15,7 +18,8 @@ authController.post('/register',
                 throw errors;
             }
 
-            const token = await register(req.body.email, req.body.password);
+            const { email, password, firstName, lastName } = req.body;
+            const token = await register(email, password, firstName, lastName);
             res.json(token);
         } catch (error) {
             const message = parseError(error);
