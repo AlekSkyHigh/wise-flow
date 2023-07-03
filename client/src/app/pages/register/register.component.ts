@@ -17,15 +17,37 @@ export class RegisterComponent {
 
   registerUser() {
     this.authService.register(this.email, this.password, this.firstName, this.lastName)
-      .subscribe({
-        next: (response) => {
-          // Registration successful, handle the response here
-          console.log(response);
-        },
-        error: (error) => {
-          // Registration failed, handle the error here
-          console.error(error);
+      .subscribe(
+        {
+          next: () => {
+            // Registration successful
+            // Now, you can directly call the login method to authenticate the user
+            this.authService.login(this.email, this.password)
+              .subscribe(
+                {
+                  next: (response: any) => {
+                    // Login successful
+                    const token = response.accessToken; 
+                    console.log(token); //*!undefined
+                    
+
+                    // Store the token in local storage
+                    localStorage.setItem('token', token);
+
+                    // Additional logic or redirection after successful registration and login
+                  },
+                  error: (error) => {
+                    // Login failed
+                    console.error(error);
+                  }
+                }
+              );
+          },
+          error: (error) => {
+            // Registration failed
+            console.error(error);
+          }
         }
-      });
+      );
   }
 }
