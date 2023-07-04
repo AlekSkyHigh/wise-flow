@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(email: string, password: string, firstName: string, lastName: string) {
     return this.http.post(environment.apiUrl + 'users/register', { email, password, firstName, lastName });
@@ -15,4 +15,10 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http.post(environment.apiUrl + 'users/login', { email, password });
   }
+
+  logout() {
+    // Clear the local storage
+    localStorage.clear();
+  }
+
 }
