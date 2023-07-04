@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { switchMap } from 'rxjs/operators';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,42 +14,31 @@ export class RegisterComponent {
   repass: string = '';
   firstName: string = '';
   lastName: string = '';
+  router: any;
 
   constructor(private authService: AuthService) {}
 
   registerUser() {
     this.authService.register(this.email, this.password, this.firstName, this.lastName)
-      .subscribe(
-        {
-          next: () => {
-            // Registration successful
-            // Now, you can directly call the login method to authenticate the user
-            this.authService.login(this.email, this.password)
-              .subscribe(
-                {
-                  next: (response: any) => {
-                    // Login successful
-                    const token = response.accessToken; 
-                    console.log(token); //*!undefined
-                    
+      .pipe(
+        switchMap(() => this.authService.login(this.email, this.password))
+      )
+      .subscribe({
+        next: (response: any) => {
+          // Registration and login successful
+          const token = response;
 
-                    // Store the token in local storage
-                    localStorage.setItem('token', token);
+          // Store the token in local storage
+          localStorage.setItem('token', token);
 
-                    // Additional logic or redirection after successful registration and login
-                  },
-                  error: (error) => {
-                    // Login failed
-                    console.error(error);
-                  }
-                }
-              );
-          },
-          error: (error) => {
-            // Registration failed
-            console.error(error);
-          }
+          // Additional logic or redirection after successful registration and login
+          // this.router.navigate(['/']); // Replace with the desired route
+        },
+        error: (error) => {
+          // Registration or login failed
+          console.error(error);
         }
-      );
+      });
   }
 }
+
