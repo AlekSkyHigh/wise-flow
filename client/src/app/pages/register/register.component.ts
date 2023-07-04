@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { switchMap } from 'rxjs/operators';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,9 +14,8 @@ export class RegisterComponent {
   repass: string = '';
   firstName: string = '';
   lastName: string = '';
-  router: any;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   registerUser() {
     this.authService.register(this.email, this.password, this.firstName, this.lastName)
@@ -32,7 +31,7 @@ export class RegisterComponent {
           localStorage.setItem('token', token);
 
           // Additional logic or redirection after successful registration and login
-          // this.router.navigate(['/']); // Replace with the desired route
+          this.router.navigate(['/']); // Replace with the desired route
         },
         error: (error) => {
           // Registration or login failed
