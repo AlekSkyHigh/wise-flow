@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { LoginComponent } from './pages/login/login.component';
-import { TvmComponent } from './pages/tvm/tvm.component';
-import { CurrencyConverterComponent } from './pages/currency-converter/currency-converter.component';
-import { ContactsComponent } from './pages/contacts/contacts.component';
-import { AboutComponent } from './pages/about/about.component';
-import { AddFlowsComponent } from './pages/add-flows/add-flows.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { HomeComponent } from './core/pages/home/home.component';
+import { RegisterComponent } from './core/pages/register/register.component';
+import { LoginComponent } from './core/pages/login/login.component';
+import { TvmComponent } from './core/pages/tvm/tvm.component';
+import { CurrencyConverterComponent } from './core/pages/currency-converter/currency-converter.component';
+import { ContactsComponent } from './core/pages/contacts/contacts.component';
+import { AboutComponent } from './core/pages/about/about.component';
+import { AddFlowsComponent } from './core/pages/add-flows/add-flows.component';
+import { ProfileComponent } from './core/pages/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
