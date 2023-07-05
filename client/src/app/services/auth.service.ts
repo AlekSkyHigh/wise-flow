@@ -21,4 +21,9 @@ export class AuthService {
     localStorage.clear();
   }
 
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    // Check if the token exists and is valid
+    return !!token;
+  }
 }

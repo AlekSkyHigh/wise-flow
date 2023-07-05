@@ -22,7 +22,7 @@ export class NavigationComponent {
 
   }
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   logout() {
     this.authService.logout();
