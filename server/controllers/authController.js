@@ -30,7 +30,6 @@ authController.post(
 authController.post('/login', async (req, res) => {
     try {
         const token = await login(req.body.email, req.body.password);
-        console.log(token);
         res.json(token);
     } catch (error) {
         const message = parseError(error);

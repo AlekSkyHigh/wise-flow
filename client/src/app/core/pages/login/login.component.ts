@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  errorMessage: any;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -30,7 +31,7 @@ export class LoginComponent {
         },
         error: (error) => {
           // Login failed
-          console.error(error);
+          this.errorMessage = error.error.message;
         }
       });
   }
