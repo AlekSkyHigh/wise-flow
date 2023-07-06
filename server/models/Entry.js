@@ -6,7 +6,7 @@ const entrySchema = new Schema({
         enum: ['income', 'expense'],
         required: true
     },
-    frequency: {
+    occurrence: {
         type: String,
         enum: ['one-time', 'regular'],
         required: true

@@ -1,5 +1,8 @@
 const Entry = require('../models/Entry')
 
+async function create(entry) {
+    return Entry.create(entry);
+}
 
 async function getAll() {
     return Entry.find({});
@@ -13,15 +16,11 @@ async function getById(id) {
     return Entry.findById(id);
 }
 
-async function create(entry) {
-    return Entry.create(entry);
-}
-
 async function update(id, entry) {
     const existing = await Entry.findById(id);
 
     existing.type = entry.type;
-    existing.frequency = entry.frequency;
+    existing.occurrence = entry.occurrence;
     existing.amount = Number(entry.amount);
     existing.date = entry.date;
     existing.description = entry.description;
