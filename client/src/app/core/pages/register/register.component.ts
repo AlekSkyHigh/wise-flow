@@ -14,6 +14,7 @@ export class RegisterComponent {
   repass: string = '';
   firstName: string = '';
   lastName: string = '';
+  errorMessage: any;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -35,7 +36,7 @@ export class RegisterComponent {
         },
         error: (error) => {
           // Registration or login failed
-          console.error(error);
+          this.errorMessage = error.error.message;
         }
       });
   }

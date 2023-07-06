@@ -41,6 +41,14 @@
     </div>
   </div>
 
+  <div *ngIf="errorMessage" class="error-message bg-red-500 dark:bg-red-800 text-white dark:text-gray-200 py-2 px-4 rounded-md mb-6">
+    {{ errorMessage }}
+  </div>
+
+  <!-- <div *ngIf="errorMessages.length > 0">
+    <div *ngFor="let errorMessage of errorMessages" class="text-red-500">{{ errorMessage }}</div>
+  </div> -->
+
   <button type="submit"
     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)" 
