@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const cors = require('./middlewares/cors');
 const authController = require('./controllers/authController');
-const dataController = require('./controllers/dataController');
+const entryController = require('./controllers/entryController');
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
 
@@ -28,7 +28,7 @@ async function start() {
     });
 
     app.use('/users', authController);
-    app.use('/data', dataController);
+    app.use('/entries', entryController);
 
     app.listen(3030, () => console.log('REST service started'));
 }

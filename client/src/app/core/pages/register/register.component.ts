@@ -31,8 +31,7 @@ export class RegisterComponent {
           // Store the token in local storage
           localStorage.setItem('token', token);
 
-          // Additional logic or redirection after successful registration and login
-          this.router.navigate(['/']); // Replace with the desired route
+          this.router.navigate(['/']);
         },
         error: (error) => {
           // Registration or login failed

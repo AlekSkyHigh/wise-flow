@@ -1,25 +1,31 @@
-const dataController = require('express').Router();
+const entryController = require('express').Router();
 
 const { hasUser } = require('../middlewares/guards');
 const { getAll, create, getById, update, deleteById, getByUserId } = require('../services/entryService');
 const { parseError } = require('../util/parser');
 
 
-dataController.get('/', async (req, res) => {
-    let entries = [];
-    if (req.query.where) {
-        const userId = JSON.parse(req.query.where.split('=')[1]);
-        entries = await getByUserId(userId);
-    } else {
-        entries = await getAll();
-    }
-    res.json(entries);
-});
+// entryController.get('/', async (req, res) => {
+//     let entries = [];
+//     if (req.query.where) {
+//         const userId = JSON.parse(req.query.where.split('=')[1]);
+//         entries = await getByUserId(userId);
+//     } else {
+//         entries = await getAll();
+//     }
+//     res.json(entries);
+// });
 
-dataController.post('/', hasUser(), async (req, res) => {
+entryController.post('/create', hasUser(), async (req, res) => {
     try {
+        console.log('Received request:', req.body);
+
         const data = Object.assign({ _ownerId: req.user._id }, req.body);
+        console.log('Data to be saved:', data);
+
         const entry = await create(data);
+        console.log('Entry created:', entry);
+
         res.json(entry);
     } catch (err) {
         const message = parseError(err);
@@ -62,4 +68,4 @@ dataController.post('/', hasUser(), async (req, res) => {
 //     }
 // });
 
-module.exports = dataController;
+module.exports = entryController;

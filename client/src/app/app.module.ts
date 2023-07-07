@@ -17,6 +17,8 @@ import { ContactsComponent } from './core/pages/contacts/contacts.component';
 import { AboutComponent } from './core/pages/about/about.component';
 import { AddFlowsComponent } from './core/pages/add-flows/add-flows.component';
 import { ProfileComponent } from './core/pages/profile/profile.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AddHeaderInterceptor } from './interceptors/add-header.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,13 @@ import { ProfileComponent } from './core/pages/profile/profile.component';
     FormsModule,
     CoreModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AddHeaderInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
