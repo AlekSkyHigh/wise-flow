@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EntryService } from 'src/app/services/entry.service';
+import { BalanceService } from 'src/app/services/balance.service';
 
 @Component({
   selector: 'app-add-flows',
@@ -18,7 +19,10 @@ export class AddFlowsComponent {
   userId: string = '';
   balance: number = 0;
 
-  constructor(private entryService: EntryService) { }
+  constructor(
+    private entryService: EntryService,
+    public balanceService: BalanceService
+  ) { }
 
   createEntry() {
 
@@ -38,13 +42,16 @@ export class AddFlowsComponent {
         next: (response) => {
           // Entry created successfully
           console.log(response);
-          
+
           // Handle any additional logic or redirection here
           this.entryService.getEntriesByUser(response._ownerId)
             .subscribe(entries => {
               // Calculate balance based on entries
-              this.balance = entries.reduce((total, entry) => total + entry.amount, 0);
-              console.log('Balance:', this.balance);
+              const balance = entries.reduce((total, entry) => total + entry.amount, 0);
+              console.log('Balance:', balance);
+
+              // Set the balance in the BalanceService
+              this.balanceService.setBalance(balance);
             })
         },
         error: (error) => {
