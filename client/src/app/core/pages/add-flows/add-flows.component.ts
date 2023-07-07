@@ -14,6 +14,10 @@ export class AddFlowsComponent {
   date: string | null = null;
   description: string = '';
 
+  // Define userId variable
+  userId: string = '';
+  balance: number = 0;
+
   constructor(private entryService: EntryService) { }
 
   createEntry() {
@@ -28,21 +32,30 @@ export class AddFlowsComponent {
       date: this.date,
       description: this.description,
     };
-    console.log(entry);
 
     this.entryService.createEntry(entry)
       .subscribe({
         next: (response) => {
-          
           // Entry created successfully
+          console.log(response);
+          
           // Handle any additional logic or redirection here
+          this.entryService.getEntriesByUser(response._ownerId)
+            .subscribe(entries => {
+              // Calculate balance based on entries
+              this.balance = entries.reduce((total, entry) => total + entry.amount, 0);
+              console.log('Balance:', this.balance);
+            })
         },
         error: (error) => {
           // Error creating entry
           // Handle the error, display an error message, etc.
         }
       });
+
   }
+
+
 
 
 }

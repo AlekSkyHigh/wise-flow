@@ -4,12 +4,12 @@ async function create(entry) {
     return Entry.create(entry);
 }
 
-async function getAll() {
-    return Entry.find({});
-}
-
 async function getByUserId(userId) {
     return Entry.find({ _ownerId: userId });
+}
+
+async function getAll() {
+    return Entry.find({});
 }
 
 async function getById(id) {

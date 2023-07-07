@@ -12,4 +12,8 @@ export class EntryService {
   createEntry(entry: any): Observable<any> {
     return this.http.post(environment.apiUrl + 'entries/create', entry);
   }
+
+  getEntriesByUser(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(environment.apiUrl + `entries/${userId}`);
+  }
 }

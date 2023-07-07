@@ -18,13 +18,13 @@ const { parseError } = require('../util/parser');
 
 entryController.post('/create', hasUser(), async (req, res) => {
     try {
-        console.log('Received request:', req.body);
+        // console.log('Received request:', req.body);
 
         const data = Object.assign({ _ownerId: req.user._id }, req.body);
-        console.log('Data to be saved:', data);
+        // console.log('Data to be saved:', data);
 
         const entry = await create(data);
-        console.log('Entry created:', entry);
+        // console.log('Entry created:', entry);
 
         res.json(entry);
     } catch (err) {
@@ -32,6 +32,21 @@ entryController.post('/create', hasUser(), async (req, res) => {
         res.status(400).json({ message });
     }
 });
+
+entryController.get('/:userId', async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      console.log(userId);
+
+      const entries = await getByUserId(userId);
+      console.log(entries);
+
+      res.json(entries);
+    } catch (err) {
+      const message = parseError(err);
+      res.status(400).json({ message });
+    }
+  });
 
 // dataController.get('/:id', async (req, res, next) => {
 //     const item = await getById(req.params.id);
