@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+// import { AuthService } from 'src/app/services/auth.service';
 import { EntryService } from 'src/app/services/entry.service';
 
 @Component({
@@ -13,12 +14,12 @@ export class AddFlowsComponent {
   amount: number | null = null;
   date: string | null = null;
   description: string = '';
+  // balance: number = 0; // Declare the balance property
 
-  // Define userId variable
-  userId: string = '';
-  balance: number = 0;
-
-  constructor(private entryService: EntryService) { }
+  constructor(
+    private entryService: EntryService,
+    // private authService: AuthService
+  ) { }
 
   createEntry() {
 
@@ -39,7 +40,15 @@ export class AddFlowsComponent {
           // Entry created successfully
           console.log(response);
 
+          // TODO
           // Handle any additional logic or redirection here
+          // Retrieve the updated balance for the current user
+          // this.entryService.getBalance().subscribe((balance) => {
+          //   // Update the balance property in your component
+          //   this.balance = balance;
+          // });
+
+
         },
         error: (error) => {
           // Error creating entry

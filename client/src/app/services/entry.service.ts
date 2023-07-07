@@ -7,13 +7,14 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class EntryService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   createEntry(entry: any): Observable<any> {
     return this.http.post(environment.apiUrl + 'entries/create', entry);
   }
-
-  getEntriesByUser(userId: string): Observable<any[]> {
-    return this.http.get<any[]>(environment.apiUrl + `entries/${userId}`);
-  }
+  
+  // TODO
+  // getBalance(): Observable<number> {
+  //   return this.http.get<number>(environment.apiUrl + 'users/balance');
+  // }
 }

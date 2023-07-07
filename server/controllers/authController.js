@@ -4,6 +4,7 @@ const { body, validationResult } = require('express-validator');
 const { register, login, logout } = require('../services/userService');
 const { parseError } = require('../util/parser');
 
+const User = require('../models/User')
 
 authController.post(
     '/register',
@@ -42,5 +43,17 @@ authController.get('/logout', async (req, res) => {
     await logout(token);
     res.status(204).end();
 });
+
+// TODO trying to add balance
+// authController.get('/balance', async (req, res) => {
+//     try {
+//         const userId = req.user._id;
+//         const user = await User.findById(userId);
+//         res.json({ balance: user.balance });
+//     } catch (err) {
+//         const message = parseError(err);
+//         res.status(400).json({ message });
+//     }
+// });
 
 module.exports = authController;

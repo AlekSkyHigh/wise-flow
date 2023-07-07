@@ -4,6 +4,58 @@ const { hasUser } = require('../middlewares/guards');
 const { getAll, create, getById, update, deleteById, getByUserId } = require('../services/entryService');
 const { parseError } = require('../util/parser');
 
+// const Entry = require('../models/Entry');
+// const User = require('../models/User');
+
+// * Works correct for creating entries:
+entryController.post('/create', hasUser(), async (req, res) => {
+    try {
+        console.log('Received request:', req.body);
+
+        const data = Object.assign({ _ownerId: req.user._id }, req.body);
+        console.log('Data to be saved:', data);
+
+        const entry = await create(data);
+        console.log('Entry created:', entry);
+
+        res.json(entry);
+    } catch (err) {
+        const message = parseError(err);
+        res.status(400).json({ message });
+    }
+});
+
+// TODO tring to add balance:
+// entryController.post('/create', hasUser(), async (req, res) => {
+//     try {
+//         // console.log('Received request:', req.body);
+
+//         const data = Object.assign({ _ownerId: req.user._id }, req.body);
+//         // console.log('Data to be saved:', data);
+
+//         const entry = await create(data);
+//         // console.log('Entry created:', entry);
+
+//         // Find the user with the matching owner's ID
+//         const user = await User.findById(_ownerId);
+//         console.log('User:', user);
+
+//         // Update the user's balance based on the entry type (income or expense)
+//         if (entry.type === 'income') {
+//             user.balance += entry.amount;
+//         } else if (entry.type === 'expense') {
+//             user.balance -= entry.amount;
+//         }
+
+//         // Save the updated user document
+//         await user.save();
+
+//         res.json(entry);
+//     } catch (err) {
+//         const message = parseError(err);
+//         res.status(400).json({ message });
+//     }
+// });
 
 // entryController.get('/', async (req, res) => {
 //     let entries = [];
@@ -16,37 +68,20 @@ const { parseError } = require('../util/parser');
 //     res.json(entries);
 // });
 
-entryController.post('/create', hasUser(), async (req, res) => {
-    try {
-        // console.log('Received request:', req.body);
+// entryController.get('/:userId', async (req, res) => {
+//     try {
+//       const userId = req.params.userId;
+//       console.log(userId);
 
-        const data = Object.assign({ _ownerId: req.user._id }, req.body);
-        // console.log('Data to be saved:', data);
+//       const entries = await getByUserId(userId);
+//       console.log(entries);
 
-        const entry = await create(data);
-        // console.log('Entry created:', entry);
-
-        res.json(entry);
-    } catch (err) {
-        const message = parseError(err);
-        res.status(400).json({ message });
-    }
-});
-
-entryController.get('/:userId', async (req, res) => {
-    try {
-      const userId = req.params.userId;
-      console.log(userId);
-
-      const entries = await getByUserId(userId);
-      console.log(entries);
-
-      res.json(entries);
-    } catch (err) {
-      const message = parseError(err);
-      res.status(400).json({ message });
-    }
-  });
+//       res.json(entries);
+//     } catch (err) {
+//       const message = parseError(err);
+//       res.status(400).json({ message });
+//     }
+//   });
 
 // dataController.get('/:id', async (req, res, next) => {
 //     const item = await getById(req.params.id);
