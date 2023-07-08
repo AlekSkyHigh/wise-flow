@@ -12,9 +12,18 @@ export class EntryService {
   createEntry(entry: any): Observable<any> {
     return this.http.post(environment.apiUrl + 'entries/create', entry);
   }
-  
+
   // TODO
   // getBalance(): Observable<number> {
   //   return this.http.get<number>(environment.apiUrl + 'users/balance');
   // }
+
+  updateUserBalance(userId: string, amount: number, type: string): Observable<number> {
+    const url = `${environment.apiUrl}users/${userId}/balance`;
+    const balanceChange = (type === 'income') ? amount : -amount;
+    return this.http.put<number>(url, { balanceChange, type }); // Pass `type` to the request body
+  }
+  
+  
+  
 }

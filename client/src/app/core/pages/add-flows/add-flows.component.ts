@@ -14,11 +14,10 @@ export class AddFlowsComponent {
   amount: number | null = null;
   date: string | null = null;
   description: string = '';
-  // balance: number = 0; // Declare the balance property
+  balance: number = 0; // Declare the balance property
 
   constructor(
     private entryService: EntryService,
-    // private authService: AuthService
   ) { }
 
   createEntry() {
@@ -42,11 +41,14 @@ export class AddFlowsComponent {
 
           // TODO
           // Handle any additional logic or redirection here
-          // Retrieve the updated balance for the current user
-          // this.entryService.getBalance().subscribe((balance) => {
-          //   // Update the balance property in your component
-          //   this.balance = balance;
-          // });
+          const userId = response._ownerId;
+          const amount = response.amount;
+          const type = response.type;
+
+          this.entryService.updateUserBalance(userId, amount, type)
+            .subscribe((balance) => {
+              this.balance = balance;
+            });
 
 
         },

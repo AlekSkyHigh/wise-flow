@@ -47,8 +47,48 @@ function parseToken(token) {
   return jwt.verify(token, secret);
 }
 
+//* Find User
+const findUser = async (userId) => {
+  const user = await User.findById(userId)
+  return user;
+}
+
+// TODO:
+const updateUserBalance = async (userId, balanceChange, type) => {
+  try {
+    console.log('Updating user balance:', userId, balanceChange, type);
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    if (type === 'income') {
+      user.balance += balanceChange;
+    } else if (type === 'expense') {
+      user.balance -= balanceChange;
+    }
+
+    const updatedUser = await user.save();
+
+    console.log('Updated user:', updatedUser);
+
+    return updatedUser.balance;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+
+
+
 module.exports = {
   register,
   login,
-  parseToken
+  parseToken,
+  updateUserBalance,
+  findUser
+
 };
