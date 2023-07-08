@@ -19,6 +19,9 @@ export class EntryService {
     return this.http.put<number>(url, { balanceChange, type }); // Passes `type` to the request body
   }
   
-  
+  fetchUserBalance(userId: string) {
+    const url = `${environment.apiUrl}users/${userId}/balance`;
+    return this.http.get<number>(url);
+  }
   
 }
