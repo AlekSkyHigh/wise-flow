@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// import { AuthService } from 'src/app/services/auth.service';
 import { EntryService } from 'src/app/services/entry.service';
 
 @Component({
@@ -16,9 +15,7 @@ export class AddFlowsComponent {
   description: string = '';
   balance: number = 0; // Declare the balance property
 
-  constructor(
-    private entryService: EntryService,
-  ) { }
+  constructor(private entryService: EntryService ) { }
 
   createEntry() {
 
