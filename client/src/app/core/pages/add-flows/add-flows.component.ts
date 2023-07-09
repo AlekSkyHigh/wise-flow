@@ -1,40 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { EntryService } from 'src/app/services/entry.service';
+import { NavigationExtras, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-add-flows',
   templateUrl: './add-flows.component.html',
   styleUrls: ['./add-flows.component.css']
 })
-export class AddFlowsComponent implements OnInit{
-
+export class AddFlowsComponent implements OnInit {
   type: string = '';
   occurrence: string = '';
   amount: number | null = null;
   date: string | null = null;
   description: string = '';
-  balance: number = 0; // Declare the balance property
+  balance: Observable<number | undefined> | undefined;
 
   constructor(
     private entryService: EntryService,
-    private authService: AuthService
-    ) { }
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-    ngOnInit() {
-      const userId = this.authService.getCurrentUserId(); // Get the current user's ID from the authentication service
-      console.log('userId after decode = ', userId);
-      
-      this.entryService.fetchUserBalance(userId)
-        .subscribe((balance) => {
-          this.balance = balance;
-        });
-    }
+  ngOnInit() {
+    const userId = this.authService.getCurrentUserId();
+    console.log('userId after decode = ', userId);
+
+    this.balance = this.entryService.fetchUserBalance(userId);
+  }
 
   createEntry() {
-
-    const typeRadio = document.querySelector('input[name="flowType"]:checked') as HTMLInputElement;
-    const occurrenceRadio = document.querySelector('input[name="flowOccurrence"]:checked') as HTMLInputElement;
+    const typeRadio = document.querySelector(
+      'input[name="flowType"]:checked'
+    ) as HTMLInputElement;
+    const occurrenceRadio = document.querySelector(
+      'input[name="flowOccurrence"]:checked'
+    ) as HTMLInputElement;
 
     const entry = {
       type: typeRadio?.value || '',
@@ -44,31 +46,35 @@ export class AddFlowsComponent implements OnInit{
       description: this.description,
     };
 
-    this.entryService.createEntry(entry)
-      .subscribe({
-        next: (response) => {
-          // Entry created successfully
-          console.log(response);
+    this.entryService.createEntry(entry).subscribe({
+      next: (response) => {
+        // Entry created successfully
+        console.log(response);
 
-          // TODO
-          // Handle any additional logic or redirection here
-          const userId = response._ownerId;
-          const amount = response.amount;
-          const type = response.type;
+        const userId = response._ownerId;
+        const amount = response.amount;
+        const type = response.type;
 
-          this.entryService.updateUserBalance(userId, amount, type)
-            .subscribe((balance) => {
-              this.balance = balance;
-            });
+        this.entryService.updateUserBalance(userId, amount, type).subscribe(() => {
+          this.entryService.fetchUserBalance(userId).subscribe((balance) => {
+            this.balance = of(balance);
+            const navigationExtras: NavigationExtras = {
+              skipLocationChange: true,
+            };
+            this.router.navigate(['/add-flows'], navigationExtras);
 
-
-        },
-        error: (error) => {
-          // Error creating entry
-          // Handle the error, display an error message, etc.
-        }
-      });
-
+            this.type = '';
+            this.occurrence = '';
+            this.amount = null;
+            this.date = null;
+            this.description = '';
+          });
+        });
+      },
+      error: (error) => {
+        // Error creating entry
+        // Handle the error, display an error message, etc.
+      },
+    });
   }
-
 }
