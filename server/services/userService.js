@@ -53,7 +53,7 @@ const findUser = async (userId) => {
   return user;
 }
 
-// TODO:
+//* Updates user`s balance:
 const updateUserBalance = async (userId, balanceChange, type) => {
   try {
     console.log('Updating user balance:', userId, balanceChange, type);

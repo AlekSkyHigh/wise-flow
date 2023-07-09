@@ -26,4 +26,13 @@ export class AuthService {
     // Check if the token exists and is valid
     return !!token;
   }
+
+  getCurrentUserId(): string {
+    const token = localStorage.getItem('token');
+    //* Decoding the token to extract the user ID
+    const decodedToken = JSON.parse(atob(token!.split('.')[1]));
+
+    return decodedToken._id;
+  }
+
 }

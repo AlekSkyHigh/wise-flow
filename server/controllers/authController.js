@@ -80,7 +80,7 @@ authController.get('/:userId/balance', async (req, res) => {
   });
   
 
-// TODO trying to add balance
+//* Adjusting user`s balance:
 authController.put('/:userId/balance', async (req, res) => {
     try {
       const { userId } = req.params;

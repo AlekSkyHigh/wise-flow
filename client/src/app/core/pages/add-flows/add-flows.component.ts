@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { EntryService } from 'src/app/services/entry.service';
 
 @Component({
@@ -6,7 +7,7 @@ import { EntryService } from 'src/app/services/entry.service';
   templateUrl: './add-flows.component.html',
   styleUrls: ['./add-flows.component.css']
 })
-export class AddFlowsComponent {
+export class AddFlowsComponent implements OnInit{
 
   type: string = '';
   occurrence: string = '';
@@ -15,7 +16,20 @@ export class AddFlowsComponent {
   description: string = '';
   balance: number = 0; // Declare the balance property
 
-  constructor(private entryService: EntryService ) { }
+  constructor(
+    private entryService: EntryService,
+    private authService: AuthService
+    ) { }
+
+    ngOnInit() {
+      const userId = this.authService.getCurrentUserId(); // Get the current user's ID from the authentication service
+      console.log('userId after decode = ', userId);
+      
+      this.entryService.fetchUserBalance(userId)
+        .subscribe((balance) => {
+          this.balance = balance;
+        });
+    }
 
   createEntry() {
 
