@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { Observable } from 'rxjs';
+import { Entry } from '../types/entry.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,9 @@ export class AuthService {
     return !!token;
   }
 
+  //* USER SERVICES:
+
+  // * Decode the token with a pure js and returns the user _id:
   getCurrentUserId(): string {
     const token = localStorage.getItem('token');
     //* Decoding the token to extract the user ID
@@ -35,4 +40,9 @@ export class AuthService {
     return decodedToken._id;
   }
 
+  // * Fetch all the entries of the specific user:
+  fetchUserEntries(userId: string): Observable<Entry[]> {
+    const url = `${environment.apiUrl}entries/${userId}`;
+    return this.http.get<Entry[]>(url);
+  }
 }
