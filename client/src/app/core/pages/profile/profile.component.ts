@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
 
     this.authService.fetchUserEntries(userId).subscribe((entries: Entry[]) => {
       console.log(entries);
-      this.entries = entries;
+      this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.totalItems = entries.length;
     })
   }

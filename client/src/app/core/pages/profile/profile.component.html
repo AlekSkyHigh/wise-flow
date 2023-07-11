@@ -19,7 +19,7 @@
             <span class="font-semibold">Amount:</span> {{ entry.amount }}
           </div>
           <div>
-            <span class="font-semibold">Date:</span> {{ entry.date }}
+            <span class="font-semibold">Date:</span> {{ entry.date | date:'yyyy-MM-dd' }}
           </div>
           <div>
             <span class="font-semibold">Description:</span> {{ entry.description }}
