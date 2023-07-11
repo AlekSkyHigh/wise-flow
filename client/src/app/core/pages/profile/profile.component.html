@@ -7,22 +7,26 @@
     <div>
       <h3 class="text-lg font-semibold mb-4 justify-center flex">Personal Entries</h3>
       <ul class="space-y-4 w-1/2 mx-auto">
-        <li *ngFor="let entry of entries | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
-          class="border border-gray-200 rounded p-4">
-          <div>
-            <span class="font-semibold">Type:</span> {{ entry.type }}
+        <li *ngFor="let entry of entries | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage" class="border border-gray-200 rounded p-4 flex items-start justify-between">
+          <div class="flex flex-col">
+            <div>
+              <span class="font-semibold">Type:</span> {{ entry.type }}
+            </div>
+            <div>
+              <span class="font-semibold">Occurrence:</span> {{ entry.occurrence }}
+            </div>
+            <div>
+              <span class="font-semibold">Amount:</span> {{ entry.amount }}
+            </div>
+            <div>
+              <span class="font-semibold">Date:</span> {{ entry.date | date:'yyyy-MM-dd' }}
+            </div>
+            <div>
+              <span class="font-semibold">Description:</span> {{ entry.description }}
+            </div>
           </div>
-          <div>
-            <span class="font-semibold">Occurrence:</span> {{ entry.occurrence }}
-          </div>
-          <div>
-            <span class="font-semibold">Amount:</span> {{ entry.amount }}
-          </div>
-          <div>
-            <span class="font-semibold">Date:</span> {{ entry.date | date:'yyyy-MM-dd' }}
-          </div>
-          <div>
-            <span class="font-semibold">Description:</span> {{ entry.description }}
+          <div class="flex items-center">
+            <button (click)="deleteEntry(entry._id)">Delete</button>
           </div>
         </li>
       </ul>

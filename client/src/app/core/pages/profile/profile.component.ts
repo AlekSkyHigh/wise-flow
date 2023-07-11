@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { EntryService } from 'src/app/services/entry.service';
 import { Entry } from 'src/app/types/entry.model';
 
 @Component({
@@ -14,13 +15,16 @@ export class ProfileComponent implements OnInit {
   itemsPerPage: number = 4;
   totalItems: number = 0;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private entryService: EntryService
+  ) { }
 
   ngOnInit() {
     const userId = this.authService.getCurrentUserId();
 
     this.authService.fetchUserEntries(userId).subscribe((entries: Entry[]) => {
-      console.log(entries);
+      console.log('fetchUserEntries: ', entries);
       this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.totalItems = entries.length;
     })
@@ -32,6 +36,20 @@ export class ProfileComponent implements OnInit {
 
   getTotalPages(): number {
     return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
+
+  //* Deleting a specified entry:
+  deleteEntry(entryId: string) {
+    this.entryService.deleteEntry(entryId).subscribe({
+      next: () => {
+        // Remove the deleted entry from the local entries array
+        this.entries = this.entries?.filter(entry => entry._id !== entryId);
+      },
+      error: (error) => {
+        console.error(error);
+        // Handle the error if needed
+      }
+    });
   }
 
 }

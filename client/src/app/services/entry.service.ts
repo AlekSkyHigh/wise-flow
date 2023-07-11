@@ -23,5 +23,11 @@ export class EntryService {
     const url = `${environment.apiUrl}users/${userId}/balance`;
     return this.http.get<number>(url);
   }
+
+  deleteEntry(entryId: string): Observable<any> {
+    const url = `${environment.apiUrl}entries/${entryId}`;
+    return this.http.delete(url);
+  }
+  
   
 }
