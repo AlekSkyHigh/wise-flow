@@ -5,8 +5,8 @@
       <span class="text-gray-500">email</span>
     </div>
     <div>
-      <h3 class="text-lg font-semibold mb-4">Personal Entries</h3>
-      <ul class="space-y-4">
+      <h3 class="text-lg font-semibold mb-4 justify-center flex">Personal Entries</h3>
+      <ul class="space-y-4 w-1/2 mx-auto">
         <li *ngFor="let entry of entries | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
           class="border border-gray-200 rounded p-4">
           <div>
