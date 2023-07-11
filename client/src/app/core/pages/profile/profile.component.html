@@ -27,8 +27,8 @@
         </li>
       </ul>
     </div>
-    <!-- Add pagination controls here -->
-    <div class="flex justify-center items-center mt-4">
+    <!-- Pagination controls: -->
+    <div class="flex justify-center items-center mt-4" *ngIf="entries?.length">
       <button [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)"
         class="px-2 py-1 bg-blue-500 text-white mr-2">Previous
       </button>
@@ -37,5 +37,11 @@
         class="px-2 py-1 bg-blue-500 text-white ml-2">Next
       </button>
     </div>
+
+    <!-- Message for no entries -->
+    <div *ngIf="!entries || entries.length === 0" class="text-center mt-4">
+      <p>No entries found.</p>
+    </div>
+
   </div>
 </div>
