@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Entry } from 'src/app/types/entry.model';
 
@@ -9,23 +8,30 @@ import { Entry } from 'src/app/types/entry.model';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  
-  entries: Entry[] | undefined;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  entries: Entry[] | undefined;
+  currentPage: number = 1;
+  itemsPerPage: number = 4;
+  totalItems: number = 0;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     const userId = this.authService.getCurrentUserId();
-    console.log('userId after decode in ProfileComponenet = ', userId);
 
     this.authService.fetchUserEntries(userId).subscribe((entries: Entry[]) => {
       console.log(entries);
-      this.entries = entries
+      this.entries = entries;
+      this.totalItems = entries.length;
     })
-    
+  }
+
+  onPageChange(pageNumber: number) {
+    this.currentPage = pageNumber;
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
 }

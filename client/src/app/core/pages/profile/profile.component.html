@@ -1,32 +1,41 @@
 <div class="container mx-auto px-4 text-white">
-    <div class="py-8">
-      <div class="flex justify-center items-center mb-4">
-        <h1 class="text-lg font-semibold mr-2">Welcome, firstName!</h1>
-        <span class="text-gray-500">email</span>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Personal Entries</h3>
-        <ul class="space-y-4">
-          <li *ngFor="let entry of entries" class="border border-gray-200 rounded p-4">
-            <div>
-              <span class="font-semibold">Type:</span> {{ entry.type }}
-            </div>
-            <div>
-              <span class="font-semibold">Occurrence:</span> {{ entry.occurrence }}
-            </div>
-            <div>
-              <span class="font-semibold">Amount:</span> {{ entry.amount }}
-            </div>
-            <div>
-              <span class="font-semibold">Date:</span> {{ entry.date }}
-            </div>
-            <div>
-              <span class="font-semibold">Description:</span> {{ entry.description }}
-            </div>
-          </li>
-        </ul>
-      </div>
-      <!-- Add pagination controls here -->
+  <div class="py-8">
+    <div class="flex justify-center items-center mb-4">
+      <h1 class="text-lg font-semibold mr-2">Welcome, user!</h1>
+      <span class="text-gray-500">email</span>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Personal Entries</h3>
+      <ul class="space-y-4">
+        <li *ngFor="let entry of entries | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
+          class="border border-gray-200 rounded p-4">
+          <div>
+            <span class="font-semibold">Type:</span> {{ entry.type }}
+          </div>
+          <div>
+            <span class="font-semibold">Occurrence:</span> {{ entry.occurrence }}
+          </div>
+          <div>
+            <span class="font-semibold">Amount:</span> {{ entry.amount }}
+          </div>
+          <div>
+            <span class="font-semibold">Date:</span> {{ entry.date }}
+          </div>
+          <div>
+            <span class="font-semibold">Description:</span> {{ entry.description }}
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- Add pagination controls here -->
+    <div class="flex justify-center items-center mt-4">
+      <button [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)"
+        class="px-2 py-1 bg-blue-500 text-white mr-2">Previous
+      </button>
+      <span>{{ currentPage }}/{{ getTotalPages() }}</span>
+      <button [disabled]="currentPage === getTotalPages()" (click)="onPageChange(currentPage + 1)"
+        class="px-2 py-1 bg-blue-500 text-white ml-2">Next
+      </button>
     </div>
   </div>
-  
+</div>

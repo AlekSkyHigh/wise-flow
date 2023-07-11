@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { Entry } from '../types/entry.model';
+import { User } from '../types/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,11 @@ export class AuthService {
   fetchUserEntries(userId: string): Observable<Entry[]> {
     const url = `${environment.apiUrl}entries/${userId}`;
     return this.http.get<Entry[]>(url);
+  }
+
+  // TODO:
+  fetchUserFirstName(userId: string): Observable<string> {
+    const url = `${environment.apiUrl}entries/${userId}`;
+    return this.http.get<string>(url);
   }
 }
