@@ -53,14 +53,14 @@ const findUser = async (userId) => {
   return user;
 }
 
-//* Updates user`s balance:
-const updateUserBalance = async (userId, balanceChange, type) => {
+//* Adjusting user`s balance according the user`s request:
+const updateUserBalance = async (userId, balanceChange, type, deleted) => {
   try {
     // console.log('Updating user balance:', userId, balanceChange, type);
 
     console.log('balanceChange from userService.js = ', balanceChange);
     console.log('type from userService.js = ', type);
-
+    console.log('deleted from userService.js = ', deleted);
 
     const user = await User.findById(userId);
 
@@ -68,10 +68,22 @@ const updateUserBalance = async (userId, balanceChange, type) => {
       throw new Error('User not found');
     }
 
-    if (type === 'income') {
-      user.balance += balanceChange;
-    } else if (type === 'expense') {
-      user.balance -= (-balanceChange);
+    if(deleted){
+
+      if (type === 'income') {
+        user.balance -= balanceChange;
+      } else if (type === 'expense') {
+        user.balance += (-balanceChange);
+      }
+
+    } else {
+
+      if (type === 'income') {
+        user.balance += balanceChange;
+      } else if (type === 'expense') {
+        user.balance -= (-balanceChange);
+      }
+
     }
 
     const updatedUser = await user.save();

@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 4;
   totalItems: number = 0;
+  deleted: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -48,7 +49,10 @@ export class ProfileComponent implements OnInit {
       next: () => {
         // Remove the deleted entry from the local entries array
         this.entries = this.entries?.filter(entry => entry._id !== entryId);
-        this.updateBalanceAfterDelete(userId, amount, 'expense')
+
+        // Adjust the user balance in database accordingly:
+        this.deleted = true;
+        this.updateBalanceAfterDelete(userId, amount, type, this.deleted);
       },
       error: (error) => {
         console.error(error);
@@ -57,11 +61,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  // * Update user`s balance after an entry deletion:
+  updateBalanceAfterDelete(userId: string, amount: number, type: string, deleted: boolean){
 
-
-  updateBalanceAfterDelete(userId: string, amount: number, type: string){
-
-    this.entryService.updateUserBalance(userId, amount, type).subscribe({
+    this.entryService.updateUserBalance(userId, amount, type, deleted).subscribe({
 
     })
       

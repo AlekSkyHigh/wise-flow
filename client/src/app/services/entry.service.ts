@@ -13,10 +13,10 @@ export class EntryService {
     return this.http.post(environment.apiUrl + 'entries/create', entry);
   }
 
-  updateUserBalance(userId: string, amount: number, type: string): Observable<number> {
+  updateUserBalance(userId: string, amount: number, type: string, deleted: boolean): Observable<number> {
     const url = `${environment.apiUrl}users/${userId}/balance`;
     const balanceChange = (type === 'income') ? amount : -amount;
-    return this.http.put<number>(url, { balanceChange, type }); // Passes `type` to the request body
+    return this.http.put<number>(url, { balanceChange, type, deleted }); // Passes `type` to the request body
   }
   
   fetchUserBalance(userId: string) {

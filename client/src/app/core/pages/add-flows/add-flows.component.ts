@@ -16,6 +16,7 @@ export class AddFlowsComponent implements OnInit {
   date: string | null = null;
   description: string = '';
   balance: Observable<number | undefined> | undefined;
+  deleted: boolean = false;
 
   constructor(
     private entryService: EntryService,
@@ -54,8 +55,9 @@ export class AddFlowsComponent implements OnInit {
         const userId = response._ownerId;
         const amount = response.amount;
         const type = response.type;
+        this.deleted = false;
 
-        this.entryService.updateUserBalance(userId, amount, type).subscribe(() => {
+        this.entryService.updateUserBalance(userId, amount, type, this.deleted).subscribe(() => {
           this.entryService.fetchUserBalance(userId).subscribe((balance) => {
             this.balance = of(balance);
             const navigationExtras: NavigationExtras = {
