@@ -56,7 +56,11 @@ const findUser = async (userId) => {
 //* Updates user`s balance:
 const updateUserBalance = async (userId, balanceChange, type) => {
   try {
-    console.log('Updating user balance:', userId, balanceChange, type);
+    // console.log('Updating user balance:', userId, balanceChange, type);
+
+    console.log('balanceChange from userService.js = ', balanceChange);
+    console.log('type from userService.js = ', type);
+
 
     const user = await User.findById(userId);
 
@@ -67,7 +71,7 @@ const updateUserBalance = async (userId, balanceChange, type) => {
     if (type === 'income') {
       user.balance += balanceChange;
     } else if (type === 'expense') {
-      user.balance -= balanceChange;
+      user.balance -= (-balanceChange);
     }
 
     const updatedUser = await user.save();

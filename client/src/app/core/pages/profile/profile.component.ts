@@ -39,11 +39,16 @@ export class ProfileComponent implements OnInit {
   }
 
   //* Deleting a specified entry:
-  deleteEntry(entryId: string) {
+  deleteEntry(entryId: string, userId: string, amount: number, type: string) {
+
+    userId = this.authService.getCurrentUserId();
+
+
     this.entryService.deleteEntry(entryId).subscribe({
       next: () => {
         // Remove the deleted entry from the local entries array
         this.entries = this.entries?.filter(entry => entry._id !== entryId);
+        this.updateBalanceAfterDelete(userId, amount, 'expense')
       },
       error: (error) => {
         console.error(error);
@@ -52,4 +57,13 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+
+
+  updateBalanceAfterDelete(userId: string, amount: number, type: string){
+
+    this.entryService.updateUserBalance(userId, amount, type).subscribe({
+
+    })
+      
+  }
 }

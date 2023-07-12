@@ -85,7 +85,10 @@ authController.put('/:userId/balance', async (req, res) => {
     try {
       const { userId } = req.params;
       const { balanceChange, type } = req.body;
-      console.log('req.body = ', req.body);
+      // console.log('req.body = ', req.body);
+      console.log('balanceChange from authController: ', balanceChange);
+      console.log('type from authController: ', type);
+
       const user = await updateUserBalance(userId, balanceChange, type);
   
       if (!user) {
