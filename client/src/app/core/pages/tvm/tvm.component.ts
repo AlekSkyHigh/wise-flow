@@ -146,5 +146,85 @@ export class TvmComponent {
     return '0.00';
   }
 
+  calculatePeriods(presentValue: number, payment: number, featureValue: number, interest: number): string {
 
+    const isEnd = this.selectedMode === 'End';
+    const compoundingChoice = this.selectedCompounding;
+
+    if (compoundingChoice == "Annualy") {
+
+      const pv = -presentValue;
+      const pmt = -payment;
+      const rate = interest / 100;
+
+      if (isEnd) {
+        const PVadj = pv * (1 + rate); // adjust the present value for the interest earned during the year
+        const FVadj = featureValue - pmt; // subtract the payment from the future value
+
+        const periodsNeeded = Math.log((FVadj * rate + pmt * rate + pmt) / (pmt * rate + PVadj * rate + pmt)) / Math.log(1 + rate);
+        this.periods = Number((periodsNeeded + 1).toFixed(2)); // add 1 to account for the payment made at the end of the year
+
+      } else {
+        const periods = Math.log((featureValue * rate + pmt * rate + pmt) / (pmt * rate + pv * rate + pmt)) / Math.log(1 + rate);
+        this.periods = Number(periods.toFixed(2));
+      }
+
+    } else if (compoundingChoice == "Monthly") {
+
+      const pv = -presentValue;
+      const pmt = -payment;
+      const rate = (interest / 12) / 100;
+
+      if (isEnd) {
+        const PVadj = pv * (1 + rate);
+        const FVadj = featureValue - pmt;
+
+        const periodsNeeded = Math.log((FVadj * rate + pmt * rate + pmt) / (pmt * rate + PVadj * rate + pmt)) / Math.log(1 + rate);
+        this.periods = Number((periodsNeeded + 1).toFixed(2));
+
+      } else {
+        const periodsNeeded = Math.log((featureValue * rate + pmt * rate + pmt) / (pmt * rate + pv * rate + pmt)) / Math.log(1 + rate);
+        this.periods = Number(periodsNeeded.toFixed(2));
+      }
+
+    } else if (compoundingChoice == "Semiannually") {
+
+      const pv = -presentValue;
+      const pmt = -payment;
+      const rate = (interest / 2) / 100;
+
+      if (isEnd) {
+        const PVadj = pv * (1 + rate);
+        const FVadj = featureValue - pmt;
+
+        const periodsNeeded = Math.log((FVadj * rate + pmt * rate + pmt) / (pmt * rate + PVadj * rate + pmt)) / Math.log(1 + rate);
+        this.periods = Number((periodsNeeded + 1).toFixed(2));
+
+      } else {
+        const periodsNeeded = Math.log((featureValue * rate + pmt * rate + pmt) / (pmt * rate + pv * rate + pmt)) / Math.log(1 + rate);
+        this.periods = Number(periodsNeeded.toFixed(2));
+      }
+
+    } else if (compoundingChoice == "Quarterly") {
+
+      const pv = -presentValue;
+      const pmt = -payment;
+      const rate = (interest / 4) / 100;
+
+      if (isEnd) {
+        const PVadj = pv * (1 + rate);
+        const FVadj = featureValue - pmt;
+
+        const periodsNeeded = Math.log((FVadj * rate + pmt * rate + pmt) / (pmt * rate + PVadj * rate + pmt)) / Math.log(1 + rate);
+        this.periods = Number((periodsNeeded + 1).toFixed(2));
+
+      } else {
+        const periodsNeeded = Math.log((featureValue * rate + pmt * rate + pmt) / (pmt * rate + pv * rate + pmt)) / Math.log(1 + rate);
+        this.periods = Number(periodsNeeded.toFixed(2));
+      }
+
+    }
+    // Return a default value if no case matches
+    return '0.00';
+  }
 }

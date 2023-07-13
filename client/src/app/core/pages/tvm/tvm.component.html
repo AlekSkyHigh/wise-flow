@@ -72,7 +72,7 @@
             type="number" name="periods" id="periods" value="periods" [(ngModel)]="periods" tabindex="7">
         <button
             class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-white-100 hover:bg-white-200 p-1 w-1/5 rounded text-xs md:text-base"
-            id="periodsBtn">Periods</button>
+            id="periodsBtn" (click)="calculatePeriods(presentValue, payments, futureValue, annualRate)">Periods</button>
     </div>
 
 
