@@ -26,7 +26,7 @@
             type="number" name="present-value" id="present-value" value="present-value" [(ngModel)]="presentValue" tabindex="3">
         <button
             class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-white-100 hover:bg-white-200 p-1 w-1/5 rounded text-xs md:text-base"
-            id="pvBtn">PV</button>
+            id="pvBtn" (click)="calculatePresentValue(payments, futureValue, annualRate, periods)">PV</button>
     </div>
 
 

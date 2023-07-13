@@ -74,7 +74,6 @@ export class TvmComponent {
     return '0.00';
   }
 
-
   calculatePayments(presentValue: number, futureValue: number, interestRate: number, periods: number): string {
 
     const isEnd = this.selectedMode === 'End';
@@ -227,4 +226,48 @@ export class TvmComponent {
     // Return a default value if no case matches
     return '0.00';
   }
+
+  calculatePresentValue(regularPayment: number, futureValue: number, annualRate: number, periods: number): string {
+
+    const isEnd = this.selectedMode === 'End';
+    const compoundingChoice = this.selectedCompounding;
+
+    if (compoundingChoice == "Annualy") {
+
+      annualRate /= 100;
+      const compoundedRate = Math.pow(1 + annualRate, periods);
+      let presentValue = (-regularPayment * (compoundedRate - 1) / annualRate) / compoundedRate * (1 + (isEnd ? 0 : annualRate));
+      presentValue -= futureValue / compoundedRate;
+      this.presentValue = Number(presentValue.toFixed(2));
+
+    } else if (compoundingChoice == "Monthly") {
+
+      const monthlyRate = (annualRate / 12) / 100;
+      const compoundedRate = Math.pow(1 + monthlyRate, periods);
+      let presentValue = (-regularPayment * (compoundedRate - 1) / monthlyRate) / compoundedRate * (1 + (isEnd ? 0 : monthlyRate));
+      presentValue -= futureValue / compoundedRate;
+      this.presentValue = Number(presentValue.toFixed(2));
+
+    } else if (compoundingChoice == "Semiannually") {
+
+      const semiAnnualRate = (annualRate / 2) / 100;
+      const compoundedRate = Math.pow(1 + semiAnnualRate, periods);
+      let presentValue = (-regularPayment * (compoundedRate - 1) / semiAnnualRate) / compoundedRate * (1 + (isEnd ? 0 : semiAnnualRate));
+      presentValue -= futureValue / compoundedRate;
+      this.presentValue = Number(presentValue.toFixed(2));
+
+    } else if (compoundingChoice == "Quarterly") {
+
+      const quarterlyRate = (annualRate / 4) / 100;
+      const compoundedRate = Math.pow(1 + quarterlyRate, periods);
+      let presentValue = (-regularPayment * (compoundedRate - 1) / quarterlyRate) / compoundedRate * (1 + (isEnd ? 0 : quarterlyRate));
+      presentValue -= futureValue / compoundedRate;
+      this.presentValue = Number(presentValue.toFixed(2));
+
+    }
+    // Return a default value if no case matches
+    return '0.00';
+  }
+
+
 }
