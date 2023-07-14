@@ -269,5 +269,119 @@ export class TvmComponent {
     return '0.00';
   }
 
+  calculateRate(presentValue: number, payments: number, futureValue: number, periods: number): any {
+
+    console.log('presentValue = ', presentValue, typeof presentValue);
+    console.log('payments = ', payments, typeof payments);
+    console.log('futureValue = ', futureValue, typeof futureValue);
+    console.log('periods = ', periods, typeof periods);
+
+    const isEnd = this.selectedMode === 'End';
+    const compoundingChoice = this.selectedCompounding;
+
+    const n = periods; // number of years
+    const p = -presentValue; // present value (negative to represent investment)
+    const r = 0.01; // starting guess for annual interest rate
+    const f = futureValue; // future value
+    let guess = r;
+    let tolerance = 0.0001;
+
+    if (isEnd) {
+
+      console.log('isEnd = ', isEnd);
+      console.log('compoundingChoice = ', compoundingChoice);
+
+      function calculateFutureValue(rate: any) {
+        const compoundedValue = p * Math.pow((1 + rate), n); // compounded value of present value
+        console.log('compoundedValue = ', compoundedValue);
+        
+        const annuityValue = -payments * ((Math.pow((1 + rate), n) - 1) / rate); // annuity value of annual payment (negative to represent investment)
+        console.log('annuityValue = ', annuityValue);
+
+        return compoundedValue + annuityValue + f; // future value
+      }
+
+      function calculateDerivative(rate: any) {
+        const value1 = -payments * n * Math.pow((1 + rate), n - 1) / rate;
+        console.log('value1 = ', value1);
+        const value2 = -payments * ((Math.pow((1 + rate), n) - 1) / Math.pow(rate, 2)) + p * n * Math.pow((1 + rate), n - 1);
+        console.log('value2 = ', value2);
+        
+        return value1 + value2;
+      }
+
+      let i = 0;
+      let fValue = calculateFutureValue(guess);
+      let derivative = calculateDerivative(guess);
+
+      while (Math.abs(f - fValue) > tolerance && i < 1000) {
+        guess = guess - (fValue - f) / derivative; //* Newton's method
+        fValue = calculateFutureValue(guess);
+        derivative = calculateDerivative(guess);
+        i++;
+
+        console.log(`Iteration: ${i}`);
+        console.log(`Guess: ${guess}`, typeof guess);
+        console.log(`fValue: ${fValue}`, typeof fValue);
+        console.log(`Derivative: ${derivative}`, typeof derivative);
+      }
+
+      if (compoundingChoice == "Annualy") {
+        this.annualRate = Number((guess * 100).toFixed(3)); // return annual interest rate as a percentage
+      } else if (compoundingChoice == "Semiannually") {
+        this.annualRate = Number((guess * 200).toFixed(3));
+      } else if (compoundingChoice == "Monthly") {
+        this.annualRate = Number((guess * 1200).toFixed(3));
+      } else if (compoundingChoice == "Quarterly") {
+        this.annualRate = Number((guess * 400).toFixed(3));
+      }
+
+    } else {
+      console.log('isEnd = ', isEnd);
+      console.log('compoundingChoice = ', compoundingChoice);
+
+      function calculateFutureValue(rate: number) {
+        const compoundedValue = p * Math.pow((1 + rate), n); // compounded value of present value
+        const annuityValue = -payments * ((Math.pow((1 + rate), n) - 1) / rate) * (1 + rate); // annuity value of annual payment (negative to represent investment), with payment made at the beginning of each period
+        return compoundedValue + annuityValue + f; // future value
+      }
+
+      function calculateDerivative(rate: number) {
+        const value1 = -payments * n * Math.pow((1 + rate), n - 1) / rate;
+        const value2 = -payments * ((Math.pow((1 + rate), n) - 1) / Math.pow(rate, 2)) + p * n * Math.pow((1 + rate), n - 1);
+        return value1 + value2;
+      }
+
+      let i = 0;
+      let fValue = calculateFutureValue(guess);
+      let derivative = calculateDerivative(guess);
+
+      while (Math.abs(f - fValue) > tolerance && i < 1000) {
+        guess = guess - (fValue - f) / derivative;
+        fValue = calculateFutureValue(guess);
+        derivative = calculateDerivative(guess);
+        i++;
+
+        console.log(`Iteration: ${i}`);
+        console.log(`Guess: ${guess}`);
+        console.log(`fValue: ${fValue}`);
+        console.log(`Derivative: ${derivative}`);
+      }
+
+      if (compoundingChoice == "Annualy") {
+        this.annualRate = Number((guess * 100).toFixed(3)); // return annual interest rate as a percentage
+      } else if (compoundingChoice == "Semiannually") {
+        this.annualRate = Number((guess * 200).toFixed(3));
+      } else if (compoundingChoice == "Monthly") {
+        this.annualRate = Number((guess * 1200).toFixed(3));
+      } else if (compoundingChoice == "Quarterly") {
+        this.annualRate = Number((guess * 400).toFixed(3));
+      }
+
+    }
+
+  }
+
+
 
 }

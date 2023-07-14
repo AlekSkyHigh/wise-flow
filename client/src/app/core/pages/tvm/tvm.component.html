@@ -61,7 +61,7 @@
             type="number" name="annual-rate" id="annual-rate" value="annual-rate" [(ngModel)]="annualRate" tabindex="6">
         <button
             class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-white-100 hover:bg-white-200 p-1 w-1/5 rounded text-xs md:text-base"
-            id="rateBtn">Rate</button>
+            id="rateBtn" (click)="calculateRate(presentValue, payments, futureValue, periods)">Rate</button>
     </div>
 
 
