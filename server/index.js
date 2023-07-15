@@ -6,6 +6,7 @@ const authController = require('./controllers/authController');
 const entryController = require('./controllers/entryController');
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
+const ccController = require('./controllers/ccController');
 
 
 const connectionString = 'mongodb://localhost:27017/wise-flow';
@@ -29,6 +30,7 @@ async function start() {
 
     app.use('/users', authController);
     app.use('/entries', entryController);
+    app.use('/currency-converter', ccController)
 
     app.listen(3030, () => console.log('REST service started'));
 }
