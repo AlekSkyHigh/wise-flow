@@ -1,24 +1,33 @@
-<div class="flex justify-center items-center h-screen">
-  <div class="p-4 text-white">
-    <h2 class="text-xl font-bold mb-4">Currency Converter</h2>
+<div class="mt-24">
 
-    <div class="mb-4">
-      <label class="block mb-1" for="amountInput">Amount in EUR</label>
-      <input class="border rounded px-2 py-1 text-black" type="number" id="amountInput" [(ngModel)]="amount" />
-    </div>
+  <div class="text-3xl mb-10 text-white flex justify-center">
+    <h2>WiseFlow Currency Converter</h2>
+  </div>
 
-    <div class="mb-4">
-      <label class="block mb-1" for="targetCurrencySelect">Target Currency</label>
-      <select class="border rounded px-2 py-1 w-2/3 text-black" id="targetCurrencySelect" [(ngModel)]="targetCurrency">
-        <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
-      </select>
-    </div>
+  <div class="flex justify-center items-center">
+    <div class="p-4 text-white text-lg">
 
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6" (click)="convertCurrency()">Convert</button>
+      <div class="mb-4">
+        <label class="block mb-1" for="amountInput">Amount in EUR €</label>
+        <input class="w-full border rounded px-2 py-1 text-black" type="number" id="amountInput" [(ngModel)]="amount" />
+      </div>
 
-    <div *ngIf="convertedAmount !== null" class="mb-4 mt-10">
-      <label class="block mb-1">Converted Amount:</label>
-      <div class="border rounded px-2 py-1">{{ convertedAmount }}</div>
+      <div class="mb-4">
+        <label class="block mb-1" for="targetCurrencySelect">Target Currency:</label>
+        <select class="w-full border rounded px-2 py-1 text-black" id="targetCurrencySelect"
+          [(ngModel)]="targetCurrency">
+          <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+        </select>
+      </div>
+
+      <button class="w-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500 text-white dark:text-gray-200 font-bold py-2 px-4 rounded mt-6"
+        (click)="convertCurrency()">Convert</button>
+
+      <div *ngIf="convertedAmount !== null" class="mb-4 mt-10">
+        <label class="block mb-1">Converted Amount:</label>
+        <div class="border rounded px-2 py-1">{{ convertedAmount }}</div>
+      </div>
     </div>
   </div>
+
 </div>

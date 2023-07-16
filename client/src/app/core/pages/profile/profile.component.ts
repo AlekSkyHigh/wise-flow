@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
 
   entries: Entry[] | undefined;
   currentPage: number = 1;
-  itemsPerPage: number = 4;
+  itemsPerPage: number = 3;
   totalItems: number = 0;
   deleted: boolean = false;
 

@@ -1,64 +1,73 @@
-<div class="container mx-auto px-4 text-white">
-  <div class="py-8">
-    <div class="flex justify-center items-center mb-4">
-      <h1 class="text-lg font-semibold mr-2">Welcome, user!</h1>
-      <span class="text-gray-500">email</span>
-    </div>
-    <div>
-      <h3 class="text-lg font-semibold mb-4 justify-center flex">You have {{entries?.length}} personal entries</h3>
-      <ul class="space-y-4 w-1/2 mx-auto">
-        <li *ngFor="let entry of entries | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage" class="border border-gray-200 rounded p-4 flex items-start justify-between">
-          <div class="flex flex-col">
-            <div>
-              <span class="font-semibold">Type:</span>
-              <span [ngClass]="{'text-green-500': entry.type === 'income', 'text-red-500': entry.type === 'expense'}"> {{ entry.type }}</span>
-            </div>
-            <div>
-              <span class="font-semibold">Occurrence:</span> {{ entry.occurrence }}
-            </div>
-            <div>
-              <span class="font-semibold">Amount:</span> {{ entry.amount }}
-            </div>
-            <div>
-              <span class="font-semibold">Date:</span> {{ entry.date | date:'yyyy-MM-dd' }}
-            </div>
-            <div>
-              <span class="font-semibold">Description:</span> {{ entry.description }}
-            </div>
-          </div>
-          <div class="flex items-center">
-            <button (click)="deleteEntry(entry._id, entry.userId, entry.amount, entry.type)">Delete</button>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <!-- Pagination controls: -->
-    <div class="flex justify-center items-center mt-4" *ngIf="entries?.length">
-      <button [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)"
-        class="px-2 py-1 bg-blue-500 text-white mr-2">Previous
-      </button>
-      <span>{{ currentPage }}/{{ getTotalPages() }}</span>
-      <button [disabled]="currentPage === getTotalPages()" (click)="onPageChange(currentPage + 1)"
-        class="px-2 py-1 bg-blue-500 text-white ml-2">Next
-      </button>
-    </div>
+<div class="mt-11">
 
-    <!-- Message for no entries -->
-    <!-- <div *ngIf="!entries || entries.length === 0" class="text-center mt-4">
-      <p>No entries found. <a routerLink="/add-flows">Create your first entry</a></p>
-    </div> -->
+  <div class="container mx-auto px-4 text-white">
+    <div class="py-8">
+      <div class="flex justify-center items-center mb-4">
+        <h1 class="text-lg font-semibold mr-2">Welcome, user!</h1>
+        <span class="text-gray-500">email</span>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4 justify-center flex">You have {{entries?.length}} personal entries</h3>
+        <ul class="space-y-4 w-1/2 mx-auto">
+          <li *ngFor="let entry of entries | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
+            class="border border-gray-200 rounded p-4 flex items-start justify-between">
+            <div class="flex flex-col">
+              <div>
+                <span class="font-semibold">Type:</span>
+                <span [ngClass]="{'text-green-500': entry.type === 'income', 'text-red-500': entry.type === 'expense'}">
+                  {{ entry.type }}</span>
+              </div>
+              <div>
+                <span class="font-semibold">Occurrence:</span> {{ entry.occurrence }}
+              </div>
+              <div>
+                <span class="font-semibold">Amount:</span> {{ entry.amount }}
+              </div>
+              <div>
+                <span class="font-semibold">Date:</span> {{ entry.date | date:'yyyy-MM-dd' }}
+              </div>
+              <div>
+                <span class="font-semibold">Description:</span> {{ entry.description }}
+              </div>
+            </div>
+            <div class="flex items-center">
+              <button (click)="deleteEntry(entry._id, entry.userId, entry.amount, entry.type)">Delete</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- Pagination controls: -->
+      <div class="flex justify-center items-center mt-4" *ngIf="entries?.length">
+        <button [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)"
+          class="px-2 py-1 bg-blue-500 text-white mr-2">Previous
+        </button>
+        <span>{{ currentPage }}/{{ getTotalPages() }}</span>
+        <button [disabled]="currentPage === getTotalPages()" (click)="onPageChange(currentPage + 1)"
+          class="px-2 py-1 bg-blue-500 text-white ml-2">Next
+        </button>
+      </div>
 
-    <div *ngIf="!entries || entries.length === 0" class="flex flex-col items-center justify-center mt-8">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-gray-400 mb-4">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="8" x2="12" y2="12"></line>
-        <line x1="12" y1="16" x2="12" y2="16"></line>
-      </svg>
-      <p class="text-lg font-medium mb-2">No entries found.</p>
-      <p class="text-gray-600 mb-4">You haven't created any personal entries yet.</p>
-      <a routerLink="/add-flows" class="inline-flex items-center justify-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create your first entry</a>
+      <!-- Message for no entries -->
+      <!-- <div *ngIf="!entries || entries.length === 0" class="text-center mt-4">
+        <p>No entries found. <a routerLink="/add-flows">Create your first entry</a></p>
+      </div> -->
+
+      <div *ngIf="!entries || entries.length === 0" class="flex flex-col items-center justify-center mt-8">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-gray-400 mb-4">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12" y2="16"></line>
+        </svg>
+        <p class="text-lg font-medium mb-2">No entries found.</p>
+        <p class="text-gray-600 mb-4">You haven't created any personal entries yet.</p>
+        <a routerLink="/add-flows"
+          class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500">Create
+          your first entry</a>
+      </div>
+
+
     </div>
-    
-
   </div>
+
 </div>
