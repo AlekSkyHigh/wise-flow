@@ -10,11 +10,12 @@ import { AboutComponent } from './core/pages/about/about.component';
 import { AddFlowsComponent } from './core/pages/add-flows/add-flows.component';
 import { ProfileComponent } from './core/pages/profile/profile.component';
 import { onlyForLoggedInGuard } from './guards/only-for-logged-in.guard';
+import { onlyForGuestGuard } from './guards/only-for-guest.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'register', canActivate: [onlyForGuestGuard], component: RegisterComponent, pathMatch: 'full' },
+  { path: 'login', canActivate: [onlyForGuestGuard], component: LoginComponent, pathMatch: 'full' },
   { path: 'add-flows', canActivate: [onlyForLoggedInGuard], component: AddFlowsComponent, pathMatch: 'full' },
   { path: 'profile', canActivate: [onlyForLoggedInGuard], component: ProfileComponent, pathMatch: 'full'},
   { path: 'tvm', canActivate: [onlyForLoggedInGuard], component: TvmComponent, pathMatch: 'full' },
