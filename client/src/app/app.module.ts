@@ -33,7 +33,7 @@ import { AddHeaderInterceptor } from './interceptors/add-header.interceptor';
     ContactsComponent,
     AboutComponent,
     AddFlowsComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { AddFlowsComponent } from './core/pages/add-flows/add-flows.component';
 import { ProfileComponent } from './core/pages/profile/profile.component';
 import { onlyForLoggedInGuard } from './guards/only-for-logged-in.guard';
 import { onlyForGuestGuard } from './guards/only-for-guest.guard';
+import { NotFoundComponent } from './core/pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'tvm', canActivate: [onlyForLoggedInGuard], component: TvmComponent, pathMatch: 'full' },
   { path: 'currency-converter', canActivate: [onlyForLoggedInGuard], component: CurrencyConverterComponent, pathMatch: 'full' },
   { path: 'contacts', component: ContactsComponent, pathMatch: 'full' },
-  { path: 'about', component: AboutComponent, pathMatch: 'full' }
+  { path: 'about', component: AboutComponent, pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

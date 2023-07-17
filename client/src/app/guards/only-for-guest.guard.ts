@@ -14,6 +14,6 @@ export class onlyForGuestGuard implements CanActivate {
       return true;
     }
 
-    return this.router.parseUrl('/');
+    return this.router.parseUrl('/not-found');
   }
 }
