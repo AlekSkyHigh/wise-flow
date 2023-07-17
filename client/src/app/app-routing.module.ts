@@ -9,15 +9,16 @@ import { ContactsComponent } from './core/pages/contacts/contacts.component';
 import { AboutComponent } from './core/pages/about/about.component';
 import { AddFlowsComponent } from './core/pages/add-flows/add-flows.component';
 import { ProfileComponent } from './core/pages/profile/profile.component';
+import { onlyForLoggedInGuard } from './guards/only-for-logged-in.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'add-flows', component: AddFlowsComponent, pathMatch: 'full' },
-  { path: 'profile', component: ProfileComponent, pathMatch: 'full'},
-  { path: 'tvm', component: TvmComponent, pathMatch: 'full' },
-  { path: 'currency-converter', component: CurrencyConverterComponent, pathMatch: 'full' },
+  { path: 'add-flows', canActivate: [onlyForLoggedInGuard], component: AddFlowsComponent, pathMatch: 'full' },
+  { path: 'profile', canActivate: [onlyForLoggedInGuard], component: ProfileComponent, pathMatch: 'full'},
+  { path: 'tvm', canActivate: [onlyForLoggedInGuard], component: TvmComponent, pathMatch: 'full' },
+  { path: 'currency-converter', canActivate: [onlyForLoggedInGuard], component: CurrencyConverterComponent, pathMatch: 'full' },
   { path: 'contacts', component: ContactsComponent, pathMatch: 'full' },
   { path: 'about', component: AboutComponent, pathMatch: 'full' }
 ];
