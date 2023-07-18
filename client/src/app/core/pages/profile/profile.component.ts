@@ -17,6 +17,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   totalItems: number = 0;
   deleted: boolean = false;
   firstName: string = '';
+  lastName: string = '';
+  email: string = '';
 
   private destroy$: Subject<void> = new Subject();
 
@@ -35,8 +37,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.totalItems = entries.length;
       })
 
-    this.authService.fetchFirstName(userId).subscribe((firstName) => {
-      this.firstName = firstName;
+    this.authService.fetchUserData(userId).subscribe((data: any) => {
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.email = data.email;
     })
   }
 
