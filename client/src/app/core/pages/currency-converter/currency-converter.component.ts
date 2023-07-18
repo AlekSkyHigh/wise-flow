@@ -15,7 +15,7 @@ export class CurrencyConverterComponent {
   constructor(private currencyService: CcService) { }
 
   ngOnInit() {
-    // this.fetchCurrencies();
+    this.fetchCurrencies();
   }
 
   fetchCurrencies() {
