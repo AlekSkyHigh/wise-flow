@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { EntryService } from 'src/app/services/entry.service';
 import { Entry } from 'src/app/types/entry.model';
@@ -8,13 +9,16 @@ import { Entry } from 'src/app/types/entry.model';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   entries: Entry[] | undefined;
   currentPage: number = 1;
   itemsPerPage: number = 3;
   totalItems: number = 0;
   deleted: boolean = false;
+  firstName: string = '';
+
+  private destroy$: Subject<void> = new Subject();
 
   constructor(
     private authService: AuthService,
@@ -24,10 +28,15 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     const userId = this.authService.getCurrentUserId();
 
-    this.authService.fetchUserEntries(userId).subscribe((entries: Entry[]) => {
-      console.log('fetchUserEntries: ', entries);
-      this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      this.totalItems = entries.length;
+    this.authService.fetchUserEntries(userId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((entries: Entry[]) => {
+        this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        this.totalItems = entries.length;
+      })
+
+    this.authService.fetchFirstName(userId).subscribe((firstName) => {
+      this.firstName = firstName;
     })
   }
 
@@ -60,13 +69,13 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
   // * Update user`s balance after an entry deletion:
-  updateBalanceAfterDelete(userId: string, amount: number, type: string, deleted: boolean){
+  updateBalanceAfterDelete(userId: string, amount: number, type: string, deleted: boolean) {
+    this.entryService.updateUserBalance(userId, amount, type, deleted).subscribe({})
+  }
 
-    this.entryService.updateUserBalance(userId, amount, type, deleted).subscribe({
-
-    })
-      
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

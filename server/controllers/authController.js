@@ -42,7 +42,7 @@ authController.get('/logout', async (req, res) => {
     res.status(204).end();
 });
 
-// * Get user:
+// * Get user`s first name:
 authController.get('/:userId', async (req, res) => {
     try {
       const userId = req.params.userId;
@@ -52,7 +52,7 @@ authController.get('/:userId', async (req, res) => {
         return res.status(404).json({ message: 'User not found' });
       }
       
-      res.json(user);
+      res.json(user.firstName);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });

@@ -47,9 +47,9 @@ export class AuthService {
     return this.http.get<Entry[]>(url);
   }
 
-  // TODO:
-  fetchUserFirstName(userId: string): Observable<string> {
-    const url = `${environment.apiUrl}entries/${userId}`;
+  // * Getting the user`s firstname:
+  fetchFirstName(userId: string): Observable<string> {
+    const url = `${environment.apiUrl}users/${userId}`;
     return this.http.get<string>(url);
   }
 }
