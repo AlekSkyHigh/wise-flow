@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
-import { Observable } from 'rxjs';
-import { Entry } from '../types/entry.model';
-import { User } from '../types/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,30 +27,20 @@ export class AuthService {
     return !!token;
   }
 
-  //* USER SERVICES:
 
-  // * Decode the token with a pure js and returns the user _id:
-  getCurrentUserId(): string {
-    const token = localStorage.getItem('token');
-    //* Decoding the token to extract the user ID
-    const decodedToken = JSON.parse(atob(token!.split('.')[1]));
 
-    return decodedToken._id;
-  }
+  //** Functions of my first (legacy) approach that I dont use anymore, but I value:
+  //* Decode the token with a pure js and returns the user _id:
+  // getCurrentUserId(): string {
+  //   const token = localStorage.getItem('token');
+    // Decoding the token to extract the user ID
+  //   const decodedToken = JSON.parse(atob(token!.split('.')[1]));
 
-  // * Fetch all the entries of the specific user:
-  fetchUserEntries(userId: string): Observable<Entry[]> {
-    const url = `${environment.apiUrl}entries/${userId}`;
-    return this.http.get<Entry[]>(url);
-  }
-
-  // * Getting the user`s firstname:
-  // fetchFirstName(userId: string): Observable<string> {
+  //   return decodedToken._id;
+  // }
+  // * Get user data:
+  // fetchUserData(userId: string): Observable<string> {
   //   const url = `${environment.apiUrl}users/${userId}`;
   //   return this.http.get<string>(url);
   // }
-  fetchUserData(userId: string): Observable<string> {
-    const url = `${environment.apiUrl}users/${userId}`;
-    return this.http.get<string>(url);
-  }
 }

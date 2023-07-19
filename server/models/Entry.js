@@ -13,7 +13,8 @@ const entrySchema = new Schema({
     },
     amount: {
         type: Number,
-        required: [true, 'Amount is required.']
+        required: [true, 'Amount is required.'],
+        min: [0, 'Please, write the expense as a positive number']
     },
     date: {
         type: Date,

@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { EntryService } from 'src/app/services/entry.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-add-flows',
@@ -21,15 +22,14 @@ export class AddFlowsComponent implements OnInit {
 
   constructor(
     private entryService: EntryService,
-    private authService: AuthService,
+    private sessionService: SessionService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    const userId = this.authService.getCurrentUserId();
-    console.log('userId after decode = ', userId);
-
-    this.balance = this.entryService.fetchUserBalance(userId);
+    const tokenData = this.sessionService.getToken()
+    
+    this.balance = this.entryService.fetchUserBalance(tokenData._id);
   }
 
   createEntry() {

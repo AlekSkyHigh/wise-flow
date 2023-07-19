@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/session.service';
 
 
 @Component({
@@ -13,19 +14,20 @@ export class LoginComponent {
   password: string = '';
   errorMessage: any;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private sessionService: SessionService,
+    private router: Router) {}
 
   loginUser() {
     this.authService.login(this.email, this.password)
       .subscribe({
         next: (response: any) => {
           // Login successful
-          const token = response; // Assuming the server sends the token as 'token' property in the response
-          // console.log(token);
-          
-          localStorage.setItem('token', token);
+          const token = response;
 
-          // Additional logic or redirection after successful login
+          this.sessionService.createSession(token);
+
           this.router.navigate(['/']); // Replace with the desired route
         },
         error: (error) => {

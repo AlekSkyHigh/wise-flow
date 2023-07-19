@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Entry } from '../types/entry.model';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
@@ -29,5 +30,9 @@ export class EntryService {
     return this.http.delete(url);
   }
   
-  
+  // * Fetch all the entries of the specific user:
+  fetchUserEntries(userId: string): Observable<Entry[]> {
+    const url = `${environment.apiUrl}entries/${userId}`;
+    return this.http.get<Entry[]>(url);
+  }
 }

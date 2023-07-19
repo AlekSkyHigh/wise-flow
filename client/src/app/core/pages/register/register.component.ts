@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,10 @@ export class RegisterComponent {
   lastName: string = '';
   errorMessages: string[] = [];
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private sessionService: SessionService,
+    private router: Router) { }
 
   registerUser() {
     this.authService.register(this.email, this.password, this.firstName, this.lastName)
@@ -28,8 +32,7 @@ export class RegisterComponent {
           // Registration and login successful
           const token = response;
 
-          // Store the token in local storage
-          localStorage.setItem('token', token);
+          this.sessionService.createSession(token)
 
           this.router.navigate(['/']);
         },

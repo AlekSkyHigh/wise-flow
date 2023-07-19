@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
 import { EntryService } from 'src/app/services/entry.service';
+import { SessionService } from 'src/app/services/session.service';
 import { Entry } from 'src/app/types/entry.model';
 
 @Component({
@@ -23,25 +23,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject();
 
   constructor(
-    private authService: AuthService,
-    private entryService: EntryService
+    private entryService: EntryService,
+    private sessionService: SessionService
   ) { }
 
   ngOnInit() {
-    const userId = this.authService.getCurrentUserId();
+    const tokenData = this.sessionService.getToken()
+    this.firstName = tokenData.firstName;
+    this.lastName = tokenData.lastName;
+    this.email = tokenData.email;
 
-    this.authService.fetchUserEntries(userId)
+    this.entryService.fetchUserEntries(tokenData._id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((entries: Entry[]) => {
         this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         this.totalItems = entries.length;
       })
-
-    this.authService.fetchUserData(userId).subscribe((data: any) => {
-      this.firstName = data.firstName;
-      this.lastName = data.lastName;
-      this.email = data.email;
-    })
   }
 
   onPageChange(pageNumber: number) {
@@ -55,8 +52,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   //* Deleting a specified entry:
   deleteEntry(entryId: string, userId: string, amount: number, type: string) {
 
-    userId = this.authService.getCurrentUserId();
-
+    userId = this.sessionService.getToken()._id
 
     this.entryService.deleteEntry(entryId).subscribe({
       next: () => {

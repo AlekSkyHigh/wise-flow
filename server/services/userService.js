@@ -40,7 +40,15 @@ function createToken(user) {
     email: user.email
   };
 
-  return jwt.sign(payload, secret);
+  const result = {
+    _id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    accessToken: jwt.sign(payload, secret)
+  }
+
+  return result;
 }
 
 function parseToken(token) {
