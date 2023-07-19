@@ -17,12 +17,13 @@ export class AddFlowsComponent implements OnInit {
   description: string = '';
   balance: Observable<number | undefined> | undefined;
   deleted: boolean = false;
+  errorMessages: string[] = [];
 
   constructor(
     private entryService: EntryService,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     const userId = this.authService.getCurrentUserId();
@@ -74,8 +75,11 @@ export class AddFlowsComponent implements OnInit {
         });
       },
       error: (error) => {
-        // Error creating entry
-        // Handle the error, display an error message, etc.
+        if (error && error.error && error.error.message) {
+          this.errorMessages = error.error.message;
+        } else {
+          this.errorMessages = ['Unknown error occurred.'];
+        }
       },
     });
   }

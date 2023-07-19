@@ -19,6 +19,7 @@ entryController.post('/create', hasUser(), async (req, res) => {
         res.json(entry);
     } catch (err) {
         const message = parseError(err);
+        console.log(message);
         res.status(400).json({ message });
     }
 });
