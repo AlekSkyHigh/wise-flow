@@ -43,18 +43,23 @@
       </div>
     </div>
 
-    <div *ngIf="errorMessage"
-      class="error-message bg-red-500 dark:bg-red-800 text-white dark:text-gray-200 py-2 px-4 rounded-md mb-6">
-      {{ errorMessage }}
+    <!-- Check if errorMessages array is not empty -->
+    <div *ngIf="errorMessages.length > 0"
+      class="errorContainer py-2 px-4 rounded-md mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
+      <!-- Loop through the errorMessages array and display each error in a separate <p> tag with a line break -->
+      <p *ngFor="let error of errorMessages" [ngClass]="'justify-center flex text-lg'">{{ error }}<br></p>
     </div>
+
+
+
 
     <!-- <div *ngIf="errorMessages.length > 0">
       <div *ngFor="let errorMessage of errorMessages" class="text-red-500">{{ errorMessage }}</div>
     </div> -->
-    
-   <button type="submit"
-        class="font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500 text-white"
-        (click)="registerUser()">Register</button>
+
+    <button type="submit"
+      class="font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500 text-white"
+      (click)="registerUser()">Register</button>
 
   </form>
 

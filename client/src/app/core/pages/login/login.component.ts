@@ -21,9 +21,8 @@ export class LoginComponent {
         next: (response: any) => {
           // Login successful
           const token = response; // Assuming the server sends the token as 'token' property in the response
-          console.log(token);
+          // console.log(token);
           
-          // Store the token in local storage
           localStorage.setItem('token', token);
 
           // Additional logic or redirection after successful login

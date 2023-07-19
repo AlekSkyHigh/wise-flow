@@ -22,6 +22,7 @@ authController.post(
       res.json(token);
     } catch (error) {
       const message = parseError(error);
+      console.log(message);
       res.status(400).json({ message });
     }
   });

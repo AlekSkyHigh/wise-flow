@@ -14,9 +14,9 @@ export class RegisterComponent {
   repass: string = '';
   firstName: string = '';
   lastName: string = '';
-  errorMessage: any;
+  errorMessages: string[] = [];
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   registerUser() {
     this.authService.register(this.email, this.password, this.firstName, this.lastName)
@@ -34,8 +34,11 @@ export class RegisterComponent {
           this.router.navigate(['/']);
         },
         error: (error) => {
-          // Registration or login failed
-          this.errorMessage = error.error.message;
+          if (error && error.error && error.error.message) {
+            this.errorMessages = error.error.message;
+          } else {
+            this.errorMessages = ['Unknown error occurred.'];
+          }
         }
       });
   }

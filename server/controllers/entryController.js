@@ -8,13 +8,13 @@ const { parseError } = require('../util/parser');
 // * Works correct for creating entries:
 entryController.post('/create', hasUser(), async (req, res) => {
     try {
-        console.log('Received request:', req.body);
+        // console.log('Received request:', req.body);
 
         const data = Object.assign({ _ownerId: req.user._id }, req.body);
-        console.log('Data to be saved:', data);
+        // console.log('Data to be saved:', data);
 
         const entry = await create(data);
-        console.log('Entry created:', entry);
+        // console.log('Entry created:', entry);
 
         res.json(entry);
     } catch (err) {
@@ -34,7 +34,7 @@ entryController.get('/:userId', async (req, res) => {
     try {
 
         const entries = await getByUserId(userId);
-        console.log(entries);
+        // console.log(entries);
 
         res.json(entries);
         return entries;
