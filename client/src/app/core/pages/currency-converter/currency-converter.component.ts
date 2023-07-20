@@ -11,6 +11,7 @@ export class CurrencyConverterComponent {
   targetCurrency!: string;
   convertedAmount!: string | null;
   currencies!: string[];
+  rate!: string;
 
   constructor(private currencyService: CcService) { }
 
@@ -37,6 +38,7 @@ export class CurrencyConverterComponent {
           if (conversionRate !== undefined) {
             const convertedAmount = this.amount * conversionRate;
             this.convertedAmount = convertedAmount.toFixed(2);
+            this.rate = conversionRate;
           } else {
             console.error('Invalid conversion rate:', response);
             this.convertedAmount = null;

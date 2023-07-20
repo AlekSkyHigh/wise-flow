@@ -66,9 +66,9 @@ const updateUserBalance = async (userId, balanceChange, type, deleted) => {
   try {
     // console.log('Updating user balance:', userId, balanceChange, type);
 
-    console.log('balanceChange from userService.js = ', balanceChange);
-    console.log('type from userService.js = ', type);
-    console.log('deleted from userService.js = ', deleted);
+    // console.log('balanceChange from userService.js = ', balanceChange);
+    // console.log('type from userService.js = ', type);
+    // console.log('deleted from userService.js = ', deleted);
 
     const user = await User.findById(userId);
 
@@ -96,7 +96,7 @@ const updateUserBalance = async (userId, balanceChange, type, deleted) => {
 
     const updatedUser = await user.save();
 
-    console.log('Updated user:', updatedUser);
+    // console.log('Updated user:', updatedUser);
 
     return updatedUser.balance;
   } catch (err) {
