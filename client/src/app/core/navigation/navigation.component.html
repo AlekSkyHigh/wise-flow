@@ -45,15 +45,20 @@
           <a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
             href="profile" data-te-nav-link-ref [routerLink]="['profile']">Profile</a>
         </li>
+         <!-- Currency Converter link -->
+         <li *ngIf="authService.isAuthenticated()" class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+          <a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+            href="currency-converter" data-te-nav-link-ref [routerLink]="['currency-converter']">Currency Converter</a>
+        </li>
+         <!-- Percentage Calculator link -->
+         <li *ngIf="authService.isAuthenticated()" class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+          <a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+            href="percentage-calculator" data-te-nav-link-ref [routerLink]="['percentage-calculator']">Percentage Calc</a>
+        </li>
         <!-- TVM link -->
         <li *ngIf="authService.isAuthenticated()" class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
           <a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            href="tvm" data-te-nav-link-ref [routerLink]="['tvm']">TVM</a>
-        </li>
-        <!-- Currency Converter link -->
-        <li *ngIf="authService.isAuthenticated()" class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-          <a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            href="currency-converter" data-te-nav-link-ref [routerLink]="['currency-converter']">Currency Converter</a>
+            href="tvm" data-te-nav-link-ref [routerLink]="['tvm']">TVM Calc</a>
         </li>
         <!-- About link -->
         <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>

@@ -10,7 +10,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
   declarations: [
     // Declare any core components or directives here
   
-    NotFoundComponent
+    NotFoundComponent,
   ],
   exports: [
     // Export any components or directives that need to be accessible outside the core module

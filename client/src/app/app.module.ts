@@ -19,6 +19,7 @@ import { AddFlowsComponent } from './core/pages/add-flows/add-flows.component';
 import { ProfileComponent } from './core/pages/profile/profile.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddHeaderInterceptor } from './interceptors/add-header.interceptor';
+import { PercentageCalculatorComponent } from './core/pages/percentage-calculator/percentage-calculator.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AddHeaderInterceptor } from './interceptors/add-header.interceptor';
     AboutComponent,
     AddFlowsComponent,
     ProfileComponent,
+    PercentageCalculatorComponent
   ],
   imports: [
     BrowserModule,
