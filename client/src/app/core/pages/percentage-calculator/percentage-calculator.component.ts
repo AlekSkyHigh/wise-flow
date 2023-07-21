@@ -13,7 +13,7 @@ export class PercentageCalculatorComponent {
 
   calculateXpercentAmountOfY() {
     const percentage = this.xValue1 / 100;
-    const calc = percentage * this.yValue1;
+    const calc = (percentage * this.yValue1).toFixed(2);
     this.result1 = `${this.xValue1}% of ${this.yValue1} is: ${calc}`
   }
 
@@ -22,7 +22,19 @@ export class PercentageCalculatorComponent {
   result2: number | string | null = null;
 
   calculatePercentageXofY() {
-    const percentage = (this.xValue2 / this.yValue2) * 100;
-    this.result2 = percentage.toFixed(2);
+    const percentage = ((this.xValue2 / this.yValue2) * 100).toFixed(2);
+    this.result2 = `${this.xValue2} of ${this.yValue2} is ${percentage}%` 
+  }
+
+  xValue3!: number;
+  yValue3!: number;
+  result3: number | string | null = null;
+
+  calculateNumberIsYPercentOf() {
+    // const percentage = ((this.xValue3 / this.yValue3) * 100).toFixed(2);
+    // this.result3 = `${this.xValue3} of ${this.yValue3} is ${percentage}%` 
+
+    const result = (this.xValue3 / (this.yValue3 / 100)).toFixed(2);
+    this.result3 = `${this.xValue3} is ${this.yValue3}% of ${result}`
   }
 }
