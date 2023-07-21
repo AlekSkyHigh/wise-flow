@@ -71,9 +71,9 @@ const updateUserBalance = async (userId, balanceChange, type, deleted) => {
     // console.log('deleted from userService.js = ', deleted);
 
     const user = await User.findById(userId);
-
+    // console.log('user before update', user);
     if (!user) {
-      throw new Error('User not found');
+      throw new Error('User not found from userService');
     }
 
     if(deleted){
@@ -98,7 +98,7 @@ const updateUserBalance = async (userId, balanceChange, type, deleted) => {
 
     // console.log('Updated user:', updatedUser);
 
-    return updatedUser.balance;
+    return updatedUser;
   } catch (err) {
     console.error(err);
     throw err;

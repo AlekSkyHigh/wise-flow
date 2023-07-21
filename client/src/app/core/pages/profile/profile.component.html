@@ -1,4 +1,4 @@
-<div class="mt-3">
+<div class="mt-2">
 
   <div class="container mx-auto px-4 text-white">
     <div class="py-8">
@@ -9,7 +9,11 @@
       </div>
 
       <div>
-        <h3 class="text-xl text-gray-300 font-semibold mb-9 justify-center flex">You have {{entries?.length}} personal entries:</h3>
+        <h3 class="text-xl text-gray-300 font-semibold mb-9 justify-center flex">
+          You have {{ entries.length }} personal {{ entries.length === 1 ? 'entry' : 'entries' }}
+          <span *ngIf="entries.length && entries.length > 0">&nbsp;and a balance of €{{ balance | async }}:</span>
+        </h3>
+                
         <ul class="space-y-4 w-1/2 mx-auto">
           <li *ngFor="let entry of entries | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
             [ngClass]="{
@@ -44,7 +48,7 @@
         </ul>
       </div>
       <!-- Pagination controls: -->
-      <div class="flex justify-center items-center mt-14" *ngIf="entries?.length">
+      <div class="flex justify-center items-center mt-11" *ngIf="entries.length">
         <button [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)"
           class="w-1/6 px-2 py-1 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500 text-white mr-2">Previous
         </button>

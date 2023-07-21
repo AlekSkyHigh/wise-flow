@@ -85,16 +85,18 @@ authController.get('/:userId/balance', async (req, res) => {
 authController.put('/:userId/balance', async (req, res) => {
   try {
     const { userId } = req.params;
+    // console.log(userId);
     const { balanceChange, type, deleted } = req.body;
     // console.log('req.body = ', req.body);
-    console.log('balanceChange from authController: ', balanceChange);
-    console.log('type from authController: ', type);
-    console.log('deleted from authController: ', deleted);
+    // console.log('balanceChange from authController: ', balanceChange);
+    // console.log('type from authController: ', type);
+    // console.log('deleted from authController: ', deleted);
 
     const user = await updateUserBalance(userId, balanceChange, type, deleted);
+    // console.log(`user from controller = `, user);
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found from controller' });
     }
 
     res.json(user.balance);
