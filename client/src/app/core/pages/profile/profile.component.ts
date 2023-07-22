@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.entryService.fetchUserEntries(tokenData._id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((entries: Entry[]) => {
-        this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        this.entries = entries;
         this.totalItems = entries.length;
       })
   }

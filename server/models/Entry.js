@@ -27,7 +27,7 @@ const entrySchema = new Schema({
         maxlength: [20, 'The description should be less than 20 characters long']
     },
     _ownerId: { type: ObjectId, ref: 'User', required: true }
-});
+}, {timestamps: true});
 
 const Entry = model('Entry', entrySchema);
 

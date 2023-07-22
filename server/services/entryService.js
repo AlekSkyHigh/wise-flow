@@ -5,7 +5,7 @@ async function create(entry) {
 }
 
 async function getByUserId(userId) {
-    return Entry.find({ _ownerId: userId });
+    return Entry.find({ _ownerId: userId }).sort({createdAt: -1});
 }
 
 async function getAll() {
