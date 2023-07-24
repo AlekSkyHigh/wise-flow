@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const TokenBlacklist = require('../models/TokenBlacklist');
 
 const secret = 'q-90234xcwmietvuselrg';
 
@@ -51,8 +52,20 @@ function createToken(user) {
   return result;
 }
 
-function parseToken(token) {
-  return jwt.verify(token, secret);
+async function parseToken(token) {
+
+  const tokens = await TokenBlacklist.find({ token });
+
+  if (tokens.length > 0) {
+    throw new Error('Token is blacklisted!');
+  }
+
+  const result = jwt.verify(token, secret);
+  return result;
+}
+
+async function logout(token) {
+  await TokenBlacklist.create({ token });
 }
 
 //* Find User
@@ -76,7 +89,7 @@ const updateUserBalance = async (userId, balanceChange, type, deleted) => {
       throw new Error('User not found from userService');
     }
 
-    if(deleted){
+    if (deleted) {
 
       if (type === 'income') {
         user.balance -= balanceChange;
@@ -113,6 +126,6 @@ module.exports = {
   login,
   parseToken,
   updateUserBalance,
-  findUser
-
+  findUser,
+  logout,
 };

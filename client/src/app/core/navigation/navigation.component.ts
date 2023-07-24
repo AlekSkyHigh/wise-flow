@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { SessionService } from 'src/app/services/session.service';
 
 // Initialization for ES Users
 import {
@@ -22,10 +23,21 @@ export class NavigationComponent {
 
   }
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private sessionService: SessionService,
+    private router: Router) { }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/']); // Redirect to login page after logout
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: (data) => {
+        //console.log(data);
+        this.sessionService.clearSession();
+        // this.router.navigate(['/']);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 }

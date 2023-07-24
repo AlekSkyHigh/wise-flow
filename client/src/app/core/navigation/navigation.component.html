@@ -73,7 +73,7 @@
         <!-- Logout link -->
         <li *ngIf="authService.isAuthenticated()" class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
           <a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-           data-te-nav-link-ref routerLink="logout" (click)="logout()">Logout</a>
+           data-te-nav-link-ref routerLink="/" (click)="logout()">Logout</a>
         </li>
         <!-- Disabled link -->
         <!-- <li class="lg:pr-2" data-te-nav-link-ref>

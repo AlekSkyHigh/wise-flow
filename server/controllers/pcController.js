@@ -23,13 +23,9 @@ pcController.post('', hasUser(), async (req, res) => {
 pcController.get('/:userId', async (req, res) => {
 
     const { userId } = req.params;
-    console.log('pcController`s userId =', userId);
-    // console.log('entryController`s req.body = ', req.body);
 
     try {
-
         const results = await getByUserId(userId);
-        console.log(results);
 
         res.json(results);
         return results;

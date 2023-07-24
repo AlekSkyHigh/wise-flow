@@ -38,10 +38,17 @@ authController.post('/login', async (req, res) => {
 });
 
 authController.get('/logout', async (req, res) => {
-  const token = req.token;
-  await logout(token);
-  res.status(204).end();
-});
+  try {
+      const token = req.token;
+      await logout(token);
+      res.status(204).json({ message: 'Successful logout!' });
+  } catch (error) {
+      const message = parseError(err);
+      console.log(message);
+      res.status(401).json({ message });
+  }
+
+})
 
 // * Get user data details:
 authController.get('/:userId', async (req, res) => {

@@ -17,8 +17,7 @@ export class AuthService {
   }
 
   logout() {
-    // Clear the local storage
-    localStorage.clear();
+    return this.http.get(environment.apiUrl + 'users/logout')
   }
 
   isAuthenticated(): boolean {
@@ -33,7 +32,7 @@ export class AuthService {
   //* Decode the token with a pure js and returns the user _id:
   // getCurrentUserId(): string {
   //   const token = localStorage.getItem('token');
-    // Decoding the token to extract the user ID
+  // Decoding the token to extract the user ID
   //   const decodedToken = JSON.parse(atob(token!.split('.')[1]));
 
   //   return decodedToken._id;
