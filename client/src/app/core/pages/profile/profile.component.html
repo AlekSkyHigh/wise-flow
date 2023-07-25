@@ -13,7 +13,6 @@
           You have {{ entries.length }} personal {{ entries.length === 1 ? 'entry' : 'entries' }}
           <span *ngIf="entries.length && entries.length > 0">&nbsp;and a balance of €{{ balance | async }}:</span>
         </h3>
-                
         <ul class="space-y-4 w-1/2 mx-auto">
           <li *ngFor="let entry of entries | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
             [ngClass]="{
@@ -47,6 +46,11 @@
           </li>
         </ul>
       </div>
+
+
+      <!-- Spinner -->
+      <app-loading [isLoading]="isLoading"></app-loading>
+
       <!-- Pagination controls: -->
       <div class="flex justify-center items-center mt-11" *ngIf="entries.length">
         <button [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)"

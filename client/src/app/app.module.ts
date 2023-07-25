@@ -20,37 +20,39 @@ import { ProfileComponent } from './core/pages/profile/profile.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddHeaderInterceptor } from './interceptors/add-header.interceptor';
 import { PercentageCalculatorComponent } from './core/pages/percentage-calculator/percentage-calculator.component';
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    NavigationComponent,
-    FooterComponent,
-    RegisterComponent,
-    TvmComponent,
-    CurrencyConverterComponent,
-    ContactsComponent,
-    AboutComponent,
-    AddFlowsComponent,
-    ProfileComponent,
-    PercentageCalculatorComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    CoreModule,
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AddHeaderInterceptor,
-      multi: true,
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        LoginComponent,
+        NavigationComponent,
+        FooterComponent,
+        RegisterComponent,
+        TvmComponent,
+        CurrencyConverterComponent,
+        ContactsComponent,
+        AboutComponent,
+        AddFlowsComponent,
+        ProfileComponent,
+        PercentageCalculatorComponent
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AddHeaderInterceptor,
+            multi: true,
+        }
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        CoreModule,
+        SharedModule
+    ]
 })
 export class AppModule { }

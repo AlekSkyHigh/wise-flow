@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   lastName: string = '';
   email: string = '';
   balance: Observable<number | undefined> | undefined;
+  isLoading: boolean = false;
 
   private destroy$: Subject<void> = new Subject();
 
@@ -36,11 +37,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.lastName = tokenData.lastName;
     this.email = tokenData.email;
 
-    this.balance = this.entryService.fetchUserBalance(tokenData._id);
+    this.isLoading = true;
+
+    this.balance = this.entryService.fetchUserBalance(tokenData._id)
 
     this.entryService.fetchUserEntries(tokenData._id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((entries: Entry[]) => {
+        this.isLoading = false;
         this.entries = entries;
         this.totalItems = entries.length;
       })
@@ -95,7 +99,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error(error);
-        // Handle the error if needed
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
