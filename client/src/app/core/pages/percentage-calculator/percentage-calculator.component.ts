@@ -40,6 +40,12 @@ export class PercentageCalculatorComponent implements OnInit {
   result1: number | string | null = null;
 
   calculateXpercentAmountOfY() {
+
+    if (typeof this.xValue1 !== 'number' || typeof this.yValue1 !== 'number' || isNaN(this.xValue1) || isNaN(this.yValue1)) {
+      this.result1 = "Please enter valid numbers.";
+      return;
+    }
+
     const percentage = this.xValue1 / 100;
     const calc = (percentage * this.yValue1).toFixed(2);
     this.result1 = `${this.xValue1}% of ${this.yValue1} is: ${calc}`
@@ -58,6 +64,12 @@ export class PercentageCalculatorComponent implements OnInit {
   result2: number | string | null = null;
 
   calculatePercentageXofY() {
+
+    if (typeof this.xValue2 !== 'number' || typeof this.yValue2 !== 'number' || isNaN(this.xValue2) || isNaN(this.yValue2)) {
+      this.result2 = "Please enter valid numbers.";
+      return;
+    }
+
     const percentage = ((this.xValue2 / this.yValue2) * 100).toFixed(2);
     this.result2 = `${this.xValue2} of ${this.yValue2} is ${percentage}%`
 
@@ -75,6 +87,12 @@ export class PercentageCalculatorComponent implements OnInit {
   result3: number | string | null = null;
 
   calculateNumberIsYPercentOf() {
+
+    if (typeof this.xValue3 !== 'number' || typeof this.yValue3 !== 'number' || isNaN(this.xValue3) || isNaN(this.yValue3)) {
+      this.result3 = "Please enter valid numbers.";
+      return;
+    }
+
     const result = (this.xValue3 / (this.yValue3 / 100)).toFixed(2);
     this.result3 = `${this.xValue3} is ${this.yValue3}% of ${result}`
 
