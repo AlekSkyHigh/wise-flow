@@ -61,50 +61,54 @@ export class ProfileComponent implements OnInit, OnDestroy {
   //* Deleting a specified entry:
   deleteEntry(entryId: string, userId: string, amount: number, type: string) {
 
-    userId = this.sessionService.getToken()._id
+    const confirmed = confirm('Are you sure?');
+    if (confirmed) {
 
-    this.entryService.deleteEntry(entryId).subscribe({
-      next: () => {
-        //* Remove the deleted entry from the local entries array
-        this.entries = this.entries?.filter(entry => entry._id !== entryId);
+      userId = this.sessionService.getToken()._id
 
-        //* Adjust the user balance in database accordingly:
-        this.deleted = true;
+      this.entryService.deleteEntry(entryId).subscribe({
+        next: () => {
+          //* Remove the deleted entry from the local entries array
+          this.entries = this.entries?.filter(entry => entry._id !== entryId);
 
-        //* Dynamically update the UI
-        this.entryService.updateUserBalance(userId, amount, type, this.deleted).subscribe(() => {
-          this.entryService.fetchUserBalance(userId).subscribe((balance) => {
-            this.balance = of(balance);
+          //* Adjust the user balance in database accordingly:
+          this.deleted = true;
 
-            this.entryService.fetchUserEntries(userId)
-              .pipe(takeUntil(this.destroy$))
-              .subscribe((entries: Entry[]) => {
-                this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-                this.totalItems = entries.length;
+          //* Dynamically update the UI
+          this.entryService.updateUserBalance(userId, amount, type, this.deleted).subscribe(() => {
+            this.entryService.fetchUserBalance(userId).subscribe((balance) => {
+              this.balance = of(balance);
 
-                const totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-                const lastPage = totalPages > 0 ? totalPages : 1;
-                if (this.currentPage > lastPage && (this.totalItems - this.itemsPerPage * (this.currentPage - 1)) === 0) {
-                  this.currentPage = Math.max(this.currentPage - 1, 1);
-                }
-              })
+              this.entryService.fetchUserEntries(userId)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe((entries: Entry[]) => {
+                  this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                  this.totalItems = entries.length;
 
-            const navigationExtras: NavigationExtras = {
-              skipLocationChange: true,
-            };
-            this.router.navigate(['/profile'], navigationExtras);
+                  const totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+                  const lastPage = totalPages > 0 ? totalPages : 1;
+                  if (this.currentPage > lastPage && (this.totalItems - this.itemsPerPage * (this.currentPage - 1)) === 0) {
+                    this.currentPage = Math.max(this.currentPage - 1, 1);
+                  }
+                })
+
+              const navigationExtras: NavigationExtras = {
+                skipLocationChange: true,
+              };
+              this.router.navigate(['/profile'], navigationExtras);
+            });
           });
-        });
-        
-      },
-      error: (error) => {
-        console.error(error);
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
   ngOnDestroy() {
