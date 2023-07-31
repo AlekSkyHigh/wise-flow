@@ -11,17 +11,17 @@ This is a full-stack financial tool designed to help users manage their finances
 This project was built using the following technologies and dependencies:
 
 ### Client-side:
-TypeScript
-Angular
-Tailwind CSS
-JavaScript
-HTML & CSS
+- TypeScript
+- Angular
+- Tailwind CSS
+- JavaScript
+- HTML & CSS
 ### Server-side:
-Express - Node.js web application framework
-Mongoose - a connection between MongoDB and the Node.js JavaScript runtime environment.
-JSON Web Token
-Bcrypt - a password-hashing function
-Axios - Promise based HTTP client for the browser and node.js
+- Express - Node.js web application framework
+- Mongoose - a connection between MongoDB and the Node.js
+- JSON Web Token
+- Bcrypt - a password-hashing function
+- Axios - Promise based HTTP client for the browser and node.js
 
 ## Features
 
