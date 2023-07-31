@@ -2,9 +2,26 @@
 
 ## Description
 
-This project was developed as part of the JS Web Developer program at Software University. It is a full-stack financial tool designed to help users manage their finances efficiently. The application allows users to track their cashflow effortlessly and provides various features to enhance financial management.
+Welcome to my precisely crafted personal project, representing the culmination of over a year's worth of dedicated learning and practical experience in the field of web development. This project serves a dual purpose: firstly, as the centerpiece for my thesis/project defense in the Angular - June 2023 course, where I aim to showcase the depth of my knowledge and technical expertise in this framework. Secondly, it holds a special place in my personal portfolio, which aims to demonstrate my growth and proficiency as a skilled web developer. Beyond the Angular - June 2023 course exam, I am devoted to refining and enhancing this financial tool based on feedback, industry trends, and new technologies. As I grow as a developer, so will this project, as it will be regularly updated to ensure it remains relevant and usefull in the ever-evolving landscape of web development.
 
-The app is built using Angular and Tailwind CSS for the client-side, and it utilizes a custom RESTful-style server with Express.js, MongoDB, Mongoose, Bcrypt, and Jsonwebtoken for the server-side functionalities.
+This is a full-stack financial tool designed to help users manage their finances efficiently. The application allows users to track their cashflow effortlessly and provides various features to enhance financial management.
+
+## Project Technologies and Dependencies
+
+This project was built using the following technologies and dependencies:
+
+### Client-side:
+TypeScript
+Angular
+Tailwind CSS
+JavaScript
+HTML & CSS
+### Server-side:
+Express - Node.js web application framework
+Mongoose - a connection between MongoDB and the Node.js JavaScript runtime environment.
+JSON Web Token
+Bcrypt - a password-hashing function
+Axios - Promise based HTTP client for the browser and node.js
 
 ## Features
 
@@ -22,16 +39,16 @@ The app is built using Angular and Tailwind CSS for the client-side, and it util
 
 The app implements efficient state management, ensuring that users can always pick up from where they left off. When users log out, their progress is saved securely on the server. Upon returning to the app and logging back in, users can seamlessly resume their work without losing any data.
 
-
 ## Security Updates
 
 The project includes the following security enhancements:
 
 - Guards: Different features are protected with guards to restrict access based on user authentication status.
 
+- JWT Blacklist: A blacklist system stores every used JSON Web Token (JWT) after a user logs out, ensuring better security.
+
 - 404 Page: A custom 404 page is implemented to handle undefined routes.
 
-- JWT Blacklist: A blacklist system stores every used JSON Web Token (JWT) after a user logs out, ensuring better security.
 
 ## Installation
 
@@ -44,7 +61,7 @@ To run the project locally, follow these steps:
 
 ## License
 
-[MIT License](link-to-your-license-file) <!-- TODO -->
+[MIT License](https://github.com/AlekSkyHigh/wise-flow/blob/master/LICENSE)
 
 ## Contact
 
