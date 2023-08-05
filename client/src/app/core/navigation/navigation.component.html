@@ -19,12 +19,16 @@
     </button>
 
     <!-- Collapsible navbar container -->
-    <div class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
+    <div class="!visible w-full bg-neutral-600 mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto absolute top-8 left-0 lg:relative lg:top-0 lg:right-0"
       id="navbarSupportedContent3" data-te-collapse-item>
       <!-- Navbar title -->
-      <a class="pr-2 text-xl text-black dark:text-neutral-200" [routerLink]="['/']">WiseFlow</a>
+      <a class="pr-2 md:text-xl hidden lg:flex text-black dark:text-neutral-200" [routerLink]="['/']">WiseFlow</a>
       <!-- Left links -->
       <ul class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row" data-te-navbar-nav-ref>
+        <li class="mb-4 lg:mb-0 lg:pr-2 lg:hidden flex mt-3" data-te-nav-item-ref>
+          <a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+           data-te-nav-link-ref routerLink="/">WiseFlow</a>
+        </li>
         <!-- Login link -->
         <li *ngIf="!authService.isAuthenticated()" class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
           <a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"

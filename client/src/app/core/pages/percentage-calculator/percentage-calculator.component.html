@@ -1,14 +1,6 @@
-<div class="flex-col w-1/2 justify-center mx-auto mt-9">
+<div class="flex-col lg:w-1/2 w-5/6 justify-center mx-auto mt-9">
 
     <h1 class="text-white text-4xl mb-9 flex justify-center">Percentage Calculator</h1>
-
-    <div *ngIf="calculationHistory.length && calculationHistory.length > 0" class="text-white text-xl absolute top-18 right-24 border p-4 rounded-md bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500">
-        <h1 class="mb-6">Your last 3 searches:</h1>
-        <div  *ngFor="let historyItem of calculationHistory">
-            <p class="p-1">{{ historyItem.result }}</p>
-            <!-- Add more properties as needed -->
-        </div>
-    </div>
 
     <div class="bg-gray-800 p-4 rounded-lg">
         <h2 class="text-white text-xl font-semibold justify-center flex">What is X% of Y?</h2>
@@ -59,6 +51,14 @@
             class="text-white justify-center flex mx-auto w-full mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500">
             Calculate
         </button>
+    </div>
+
+    <div *ngIf="calculationHistory.length && calculationHistory.length > 0" class="text-white text-xl md:w-1/7 lg:absolute lg:top-44 lg:right-4 xl:right-24 flex-col mx-auto py-0 border p-4 mb-4 rounded-md bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
+        <h1 class="mb-3 flex justify-center">Your last 3 searches:</h1>
+        <div  *ngFor="let historyItem of calculationHistory">
+            <p class="p-1 flex justify-center">{{ historyItem.result }}</p>
+            <!-- Add more properties as needed -->
+        </div>
     </div>
 
 </div>
