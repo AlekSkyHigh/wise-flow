@@ -10,7 +10,8 @@ const ccController = require('./controllers/ccController');
 const pcController = require('./controllers/pcController');
 
 
-const connectionString = 'mongodb://localhost:27017/wise-flow';
+// const connectionString = 'mongodb://localhost:27017/wise-flow';
+const connectionString = 'mongodb+srv://alekskyhigh:MgVhuBeTtdk847n@cluster0.m0wvu5i.mongodb.net/?retryWrites=true&w=majority'
 
 start();
 
