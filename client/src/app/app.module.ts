@@ -13,7 +13,6 @@ import { FooterComponent } from './core/footer/footer.component';
 import { RegisterComponent } from './core/pages/register/register.component';
 import { TvmComponent } from './core/pages/tvm/tvm.component';
 import { CurrencyConverterComponent } from './core/pages/currency-converter/currency-converter.component';
-import { ContactsComponent } from './core/pages/contacts/contacts.component';
 import { AboutComponent } from './core/pages/about/about.component';
 import { AddFlowsComponent } from './core/pages/add-flows/add-flows.component';
 import { ProfileComponent } from './core/pages/profile/profile.component';
@@ -32,7 +31,6 @@ import { SharedModule } from "./shared/shared.module";
         RegisterComponent,
         TvmComponent,
         CurrencyConverterComponent,
-        ContactsComponent,
         AboutComponent,
         AddFlowsComponent,
         ProfileComponent,
