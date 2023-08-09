@@ -71,9 +71,11 @@ Happy budgeting and financial management!
 
 ## Images
 
-### Guest views
+- Snapshot of the Home Page for Non-Registered Visitors
 ![Snapshot of the Home Page for Non-Registered Visitors](./client/src/assets/Screenshot%202023-08-09%20at%2022.55.27.png)
 
+- Snapshot of the Login Page for Non-Registered Visitors
 ![Snapshot of the Login Page for Non-Registered Visitors](./client/src/assets/Screenshot%202023-08-09%20at%2022.48.43.png)
 
+- Snapshot of the Register Page for Non-Registered Visitors
 ![Snapshot of the Register Page for Non-Registered Visitors](./client/src/assets/Screenshot%202023-08-09%20at%2022.49.09.png)
