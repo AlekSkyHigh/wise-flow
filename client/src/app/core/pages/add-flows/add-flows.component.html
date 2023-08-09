@@ -68,7 +68,7 @@
             <label for="visitors" class="block font-medium w-full text-center lg:text-left lg:w-64">Amount:</label>
             <input type="number" id="visitors" [(ngModel)]="amount" name="amount"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" required>
+                placeholder="Enter Amount in Euros (€)..." required>
         </div>
 
         <div class="mx-auto w-5/6 md:w-1/2 lg:w-1/3 flex flex-col lg:flex-row mb-3">
@@ -97,5 +97,5 @@
 
 <div
     class="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white dark:text-gray-200 py-2 px-4 w-5/6 rounded-md md:w-1/3 mx-auto md:mt-8 mb-4">
-    <p class="flex justify-center md:text-2xl">Balance: {{ balance | async }} EUR €</p>
+    <p class="flex justify-center md:text-2xl">Your Account Balance: €{{ balance | async }}</p>
 </div>
