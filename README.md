@@ -68,3 +68,15 @@ To run the project locally, follow these steps:
 If you have any questions or inquiries, feel free to reach out to me at aleksandar.voynov.info@gmail.com
 
 Happy budgeting and financial management!
+
+## Images
+
+### Guest views
+- Home page view of guests:
+![Alt text]('client/src/assets/Screenshot 2023-08-09 at 22.55.27.png')
+
+- Login page view for guests:
+![Alt text]('client/src/assets/Screenshot 2023-08-09 at 22.48.43.png')
+
+- Register page view for guests:
+![Alt text]('client/src/assets/Screenshot 2023-08-09 at 22.49.09.png')
