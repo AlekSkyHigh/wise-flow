@@ -128,3 +128,12 @@ Happy budgeting and financial management!
 
 - Snapshot of the Profile Page for Registered Visitors
 ![Snapshot of the Profile Page for Registered Visitors](./client/src/assets/profile-mobile.png)
+
+- Snapshot of the Currency Converter Page for Registered Visitors
+![Snapshot of the Currency Converter Page for Registered Visitors](./client/src/assets/currencyConv-mobile.png)
+
+- Snapshot of the Percentage Calculator Page for Registered Visitors
+![Snapshot of the Percentage Calculator Page for Registered Visitors](./client/src/assets/percentageCalc-mobile.png)
+
+- Snapshot of the TVM Calculator Page for Registered Visitors
+![Snapshot of the TVM Calculator Page for Registered Visitors](./client/src/assets/tvmCalc-mobile.png)
