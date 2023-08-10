@@ -69,7 +69,7 @@ If you have any questions or inquiries, feel free to reach out to me at aleksand
 
 Happy budgeting and financial management!
 
-## Images
+## Desktop View Images
 
 - Snapshot of the Home Page for Non-Registered Visitors
 ![Snapshot of the Home Page for Non-Registered Visitors](./client/src/assets/Screenshot%202023-08-09%20at%2022.55.27.png)
@@ -100,3 +100,20 @@ Happy budgeting and financial management!
 
 - Snapshot of the TVM Calculator Page for Registered Visitors
 ![Snapshot of the TVM Calculator Page for Registered Visitors](./client/src/assets/tvmCalcDesktop.png)
+
+## Mobile View Images
+
+- Snapshot of the Home Page
+![Snapshot of the Home Page](./client/src/assets/home-mobile.png)
+
+- Snapshot of the Login Page for Non-Registered Visitors
+![Snapshot of the Login Page for Non-Registered Visitors](./client/src/assets/login-mobile.png)
+
+- Snapshot of the Register Page for Non-Registered Visitors
+![Snapshot of the Register Page for Non-Registered Visitors](./client/src/assets/register-mobile.png)
+
+- Snapshot of the Add Flows Page for Registered Visitors
+![Snapshot of the Add FLows Page for Registered Visitors](./client/src/assets/addflows-mobile.png)
+
+- Snapshot of the Profile Page for Registered Visitors
+![Snapshot of the Profile Page for Registered Visitors](./client/src/assets/profile-mobile.png)
