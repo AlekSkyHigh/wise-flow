@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EntryService } from 'src/app/services/entry.service';
 import { NavigationExtras, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './add-flows.component.html',
   styleUrls: ['./add-flows.component.css']
 })
-export class AddFlowsComponent implements OnInit {
+export class AddFlowsComponent implements OnInit, OnDestroy {
   type: string = '';
   occurrence: string = '';
   amount: number | null = null;
@@ -20,6 +19,8 @@ export class AddFlowsComponent implements OnInit {
   deleted: boolean = false;
   errorMessages: string[] = [];
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
     private entryService: EntryService,
     private sessionService: SessionService,
@@ -27,11 +28,15 @@ export class AddFlowsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const tokenData = this.sessionService.getToken()
-    
-    this.balance = this.entryService.fetchUserBalance(tokenData._id);
+    const tokenData = this.sessionService.getToken();
+  
+    const balanceSubscription = this.entryService.fetchUserBalance(tokenData._id).subscribe(balance => {
+      this.balance = of(balance);
+    });
+  
+    this.subscriptions.push(balanceSubscription);
   }
-
+  
   createEntry() {
     const typeRadio = document.querySelector(
       'input[name="flowType"]:checked'
@@ -48,10 +53,8 @@ export class AddFlowsComponent implements OnInit {
       description: this.description,
     };
 
-    this.entryService.createEntry(entry).subscribe({
+    const createEntrySubscription = this.entryService.createEntry(entry).subscribe({
       next: (response) => {
-        // Entry created successfully
-        console.log(response);
 
         const userId = response._ownerId;
         const amount = response.amount;
@@ -82,5 +85,11 @@ export class AddFlowsComponent implements OnInit {
         }
       },
     });
+
+    this.subscriptions.push(createEntrySubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }
