@@ -79,3 +79,24 @@ Happy budgeting and financial management!
 
 - Snapshot of the Register Page for Non-Registered Visitors
 ![Snapshot of the Register Page for Non-Registered Visitors](./client/src/assets/Screenshot%202023-08-09%20at%2022.49.09.png)
+
+- Snapshot of the About Us Page for Non-Registered Visitors
+![Snapshot of the About Us Page for Non-Registered Visitors](./client/src/assets/aboutUs.png)
+
+- Snapshot of the Home Page for Registered Visitors
+![Snapshot of the Home Page for Registered Visitors](./client/src/assets/homePageRegisteredDesktop.png)
+
+- Snapshot of the Add Flows Page for Registered Visitors
+![Snapshot of the Add FLows Page for Registered Visitors](./client/src/assets/addFlowsDesktop.png)
+
+- Snapshot of the Profile Page for Registered Visitors
+![Snapshot of the Profile Page for Registered Visitors](./client/src/assets/profileDesktop.png)
+
+- Snapshot of the Currency Converter Page for Registered Visitors
+![Snapshot of the Currency Converter for Registered Visitors](./client/src/assets/currencyConvDesktop.png)
+
+- Snapshot of the Percentage Calculator Page for Registered Visitors
+![Snapshot of the Percentage Calculator Page for Registered Visitors](./client/src/assets/percentageCalcDesktop.png)
+
+- Snapshot of the TVM Calculator Page for Registered Visitors
+![Snapshot of the TVM Calculator Page for Registered Visitors](./client/src/assets/tvmCalcDesktop.png)
