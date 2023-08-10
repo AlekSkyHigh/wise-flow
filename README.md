@@ -59,6 +59,17 @@ To run the project locally, follow these steps:
 3. Install the dependencies of both client and server side, using the package manager of your choice:
 4. Open your browser and go to `http://localhost:4200/` to access the application.
 
+## Live Demo (Limited for Education Purposes)
+
+Please note that the live demo of this project is provided for educational purposes and is subject to certain limitations due to the free services it is hosted on. The demo is deployed using free services from Netlify, Render and Atlas, which may result in slower response times and occasional instability. Additionaly, keep in mind that the live demo might receive updates at a slower pace compared to the version you can run locally.
+
+For a more optimal experience with faster response times and stability, I do recommend running the project locally on your machine.
+
+**Live Demo Link:** [Visit Live Demo](https://main--wise-flow.netlify.app)
+
+Keep in mind that if you encounter any issues with the live demo, such as slower loading times or occasional errors, it is not reflective of the project's performance when run locally. Feel free to clone and set up the project on your machine to experience its full potential.
+
+
 ## License
 
 [MIT License](https://github.com/AlekSkyHigh/wise-flow/blob/master/LICENSE)
