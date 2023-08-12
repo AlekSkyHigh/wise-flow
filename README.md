@@ -35,9 +35,9 @@ This project was built using the following technologies and dependencies:
 
 - **TVM Calculator:** Users can calculate various financial values based on known inputs using the Time Value of Money (TVM) calculator.
 
-## State Management and Progress Saving
+## Progress Saving
 
-The app implements efficient state management, ensuring that users can always pick up from where they left off. When users log out, their progress is saved securely on the server. Upon returning to the app and logging back in, users can seamlessly resume their work without losing any data.
+The app is ensuring that users can always pick up from where they left off. When users log out, their progress is saved securely on the server. Upon returning to the app and logging back in, users can seamlessly resume their work without losing any data.
 
 ## Security Updates
 
