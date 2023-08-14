@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
-
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +10,22 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
   errorMessage: any;
+  validateEmail: boolean = true;
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private sessionService: SessionService,
-    private router: Router) {}
+    private router: Router) { }
 
-  loginUser() {
-    this.authService.login(this.email, this.password)
+  loginUser(form: NgForm) {
+
+    if (form.invalid) {
+      return;
+    }
+    const { email, password } = form.value;
+
+    this.authService.login(email, password)
       .subscribe({
         next: (response: any) => {
           // Login successful
