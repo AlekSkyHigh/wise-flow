@@ -4,75 +4,119 @@
   </p>
 </div>
 
-
 <div class="mt-5 lg:mt-8">
+  <form class="md:w-1/3 mx-auto w-5/6" #form="ngForm" (ngSubmit)="registerUser(form)">
 
-  <form class="md:w-1/3 mx-auto w-5/6">
+    <!-- Email adress -->
     <div class="relative z-0 w-full mb-6 group">
-      <input type="email" [(ngModel)]="email" name="floating_email" id="floating_email"
+      <input type="email" name="email" id="email"
         class="block py-2.5 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-        placeholder=" " required />
+        placeholder=" " required inputEmail ngModel #inputEmail="ngModel" required minlength="10"
+        [email]="validateEmail" />
       <label for="floating_email"
         class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
         address</label>
+      <!-- client error email adress -->
+      <ng-container *ngIf="inputEmail.touched">
+        <p class="error text-red-400" *ngIf="inputEmail.errors?.['required']">
+          Email adress is required!
+        </p>
+        <p class="error text-red-400" *ngIf="inputEmail.errors?.['minlength']">
+          Email must be at least 10 characters!
+        </p>
+        <p class="error text-red-400" *ngIf="inputEmail.errors?.['email']">
+          Email is not valid!
+        </p>
+      </ng-container>
     </div>
+
+    <!-- Password -->
     <div class="relative z-0 w-full mb-6 group">
-      <input type="password" [(ngModel)]="password" name="floating_password" id="floating_password"
+      <input type="password" name="password" id="password"
         class="block py-2.5 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-        placeholder=" " required />
+        placeholder=" " required inputPassword ngModel #inputPassword="ngModel" required minlength="4" />
       <label for="floating_password"
         class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+      <!--client error password-->
+      <ng-container *ngIf="inputPassword.touched">
+        <p class="error text-red-400" *ngIf="inputPassword.errors?.['required']">
+          Password is required!
+        </p>
+        <p class="error text-red-400" *ngIf="inputPassword.errors?.['minlength']">
+          Password must be at least
+          {{inputPassword.errors?.['minlength']['requiredLength']}} characters!
+        </p>
+      </ng-container>
     </div>
+
+    <!-- Repeat Password -->
     <div class="relative z-0 w-full mb-6 group">
-      <input type="password" [(ngModel)]="repass" name="repeat_password" id="floating_repeat_password"
+      <input type="password" name="repass" id="repass"
         class="block py-2.5 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-        placeholder=" " required />
-      <label for="floating_repeat_password"
+        placeholder=" " required inputRepass ngModel #inputRepass="ngModel" required minlength="4" />
+      <label for="floating_repass"
         class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm
         password</label>
+      <!--client error password-->
+      <ng-container *ngIf="inputRepass.touched">
+        <p class="error text-red-400" *ngIf="inputRepass.errors?.['required']">
+          Repeat your password, please!
+        </p>
+        <p class="error text-red-400" *ngIf="inputRepass.value != inputPassword.value">
+          Passwords do not match!
+        </p>
+      </ng-container>
     </div>
+
+    <!-- First Name -->
     <div class="grid md:grid-cols-2 md:gap-6">
       <div class="relative z-0 w-full mb-6 group">
-        <input type="text" [(ngModel)]="firstName" name="floating_first_name" id="floating_first_name"
+        <input type="text" name="firstName" id="firstName"
           class="block py-2.5 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" " required />
+          placeholder=" " required inputFirstName ngModel #inputFirstName="ngModel" />
         <label for="floating_first_name"
           class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First
           name</label>
+        <!--client error first name-->
+        <ng-container *ngIf="inputFirstName.touched">
+          <p class="error text-red-400" *ngIf="inputFirstName.errors?.['required']">
+            First name is required!
+          </p>
+        </ng-container>
       </div>
+      <!-- Last Name -->
       <div class="relative z-0 w-full mb-6 group">
-        <input type="text" [(ngModel)]="lastName" name="floating_last_name" id="floating_last_name"
+        <input type="text" name="lastName" id="lastName"
           class="block py-2.5 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" " required />
+          placeholder=" " required inputLastName ngModel #inputLastName="ngModel" />
         <label for="floating_last_name"
           class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last
           name</label>
+        <!--client error last name-->
+        <ng-container *ngIf="inputLastName.touched">
+          <p class="error text-red-400" *ngIf="inputLastName.errors?.['required']">
+            Last name is required!
+          </p>
+        </ng-container>
       </div>
     </div>
 
-    <!-- Check if errorMessages array is not empty -->
+    <!-- Server Errors -->
     <div *ngIf="errorMessages.length > 0"
       class="errorContainer py-2 px-4 rounded-md mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
       <!-- Loop through the errorMessages array and display each error in a separate <p> tag with a line break -->
       <p *ngFor="let error of errorMessages" [ngClass]="'justify-center flex text-lg'">{{ error }}<br></p>
     </div>
 
-
-    <!-- <div *ngIf="errorMessages.length > 0">
-      <div *ngFor="let errorMessage of errorMessages" class="text-red-500">{{ errorMessage }}</div>
-    </div> -->
-
-    <button type="submit"
-      class="font-medium rounded-lg w-full px-5 py-2.5 text-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500 text-white"
-      (click)="registerUser()">Register</button>
+    <button [disabled]="form.invalid"
+      class="font-medium rounded-lg w-full px-5 py-2.5 text-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:from-pink-500 hover:to-yellow-500 text-white">Register</button>
 
   </form>
 
   <div class="flex justify-end items-center mt-16 sm:justify-center">
     <p class="text-white text-center sm:text-left mb-6">
-      Already a member? <a routerLink="/login" class="text-blue-500 hover:underline">Log in here</a> to continue managing your finances.
+      Already a member? <a routerLink="/login" class="text-blue-500 hover:underline">Log in here</a> to continue
+      managing your finances.
     </p>
   </div>
-  
-
 </div>

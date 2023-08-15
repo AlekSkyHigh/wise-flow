@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,22 +11,24 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  email: string = '';
-  password: string = '';
-  repass: string = '';
-  firstName: string = '';
-  lastName: string = '';
   errorMessages: string[] = [];
+  validateEmail: boolean = true;
 
   constructor(
     private authService: AuthService,
     private sessionService: SessionService,
     private router: Router) { }
 
-  registerUser() {
-    this.authService.register(this.email, this.password, this.firstName, this.lastName)
+  registerUser(form: NgForm) {
+
+    if (form.invalid) {
+      return;
+    }
+    const { email, password, firstName, lastName } = form.value;
+
+    this.authService.register(email, password, firstName, lastName)
       .pipe(
-        switchMap(() => this.authService.login(this.email, this.password))
+        switchMap(() => this.authService.login(email, password))
       )
       .subscribe({
         next: (response: any) => {
