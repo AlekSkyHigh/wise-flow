@@ -19,7 +19,7 @@
         Email address</label>
 
       <!-- client error email adress -->
-      <ng-container *ngIf="inputEmail.touched">
+      <ng-container *ngIf="inputEmail.dirty">
         <p class="error text-red-400" *ngIf="inputEmail.errors?.['required']">
           Email adress is required!
         </p>
@@ -42,7 +42,7 @@
         Password</label>
 
       <!--client error password-->
-      <ng-container *ngIf="inputPassword.touched">
+      <ng-container *ngIf="inputPassword.dirty">
         <p class="error text-red-400" *ngIf="inputPassword.errors?.['required']">
           Password is required!
         </p>

@@ -28,15 +28,13 @@ export class LoginComponent {
     this.authService.login(email, password)
       .subscribe({
         next: (response: any) => {
-          // Login successful
           const token = response;
 
           this.sessionService.createSession(token);
 
-          this.router.navigate(['/']); // Replace with the desired route
+          this.router.navigate(['/']);
         },
         error: (error) => {
-          // Login failed
           this.errorMessage = error.error.message;
         }
       });
