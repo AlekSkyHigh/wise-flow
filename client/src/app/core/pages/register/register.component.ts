@@ -32,7 +32,6 @@ export class RegisterComponent {
       )
       .subscribe({
         next: (response: any) => {
-          // Registration and login successful
           const token = response;
 
           this.sessionService.createSession(token)
