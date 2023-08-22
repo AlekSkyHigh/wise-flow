@@ -38,16 +38,9 @@ export class AddFlowsComponent implements OnInit, OnDestroy {
   }
   
   createEntry() {
-    const typeRadio = document.querySelector(
-      'input[name="flowType"]:checked'
-    ) as HTMLInputElement;
-    const occurrenceRadio = document.querySelector(
-      'input[name="flowOccurrence"]:checked'
-    ) as HTMLInputElement;
-
     const entry = {
-      type: typeRadio?.value || '',
-      occurrence: occurrenceRadio?.value || '',
+      type: this.type,
+      occurrence: this.occurrence,
       amount: this.amount,
       date: this.date,
       description: this.description,

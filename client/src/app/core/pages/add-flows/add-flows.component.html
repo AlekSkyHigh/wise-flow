@@ -22,14 +22,14 @@
 
                 <div
                     class="flex items-center pl-4 border border-gray-200 rounded-lg dark:border-gray-700 bg-gray-700 mr-3">
-                    <input id="incomeRadio" value="income" type="radio" name="flowType"
+                    <input id="incomeRadio" value="income" type="radio" name="flowType" [(ngModel)]="type"
                         class="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 border-gray-600">
                     <label for="incomeRadio"
                         class="w-28 py-2 mx-2 font-light text-gray-900 dark:text-gray-300">Income</label>
                 </div>
 
                 <div class="flex items-center pl-4 border border-gray-200 rounded-lg dark:border-gray-700 bg-gray-700">
-                    <input id="expenseRadio" value="expense" type="radio" name="flowType"
+                    <input id="expenseRadio" value="expense" type="radio" name="flowType" [(ngModel)]="type"
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="expenseRadio"
                         class="w-24 py-2 mx-2 font-light text-gray-900 dark:text-gray-300">Expense</label>
@@ -48,13 +48,13 @@
 
                 <div
                     class="flex items-center pl-4 border border-gray-200 rounded-lg dark:border-gray-700 bg-gray-700 mr-3">
-                    <input id="oneTimeRadio" value="one-time" type="radio" name="flowOccurrence"
+                    <input id="oneTimeRadio" value="one-time" type="radio" name="flowOccurrence" [(ngModel)]="occurrence"
                         class="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 border-gray-600">
                     <label for="oneTimeRadio"
                         class="w-28 py-2 mx-2 font-light text-gray-900 dark:text-gray-300">One-time</label>
                 </div>
                 <div class="flex items-center pl-4 border border-gray-200 rounded-lg dark:border-gray-700 bg-gray-700">
-                    <input id="regularRadio" value="regular" type="radio" name="flowOccurrence"
+                    <input id="regularRadio" value="regular" type="radio" name="flowOccurrence" [(ngModel)]="occurrence"
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="regularRadio"
                         class="w-24 py-2 mx-2 font-light text-gray-900 dark:text-gray-300">Regular</label>
